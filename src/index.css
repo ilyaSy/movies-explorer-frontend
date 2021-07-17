@@ -5,14 +5,19 @@
   background-color: #fff;
   display: flex;
   justify-content: center;
+  min-height: 100vh;
 }
 
 .page {
   min-width: 310px;
   max-width: 1280px;
   width: 100%;
+  min-height: 100%;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   font-family: 'Inter', Arial, sans-serif;
 
