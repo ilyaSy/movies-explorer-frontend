@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink , useLocation } from 'react-router-dom';
 import { profileURL, moviesURL, savedMoviesURL } from '../../utils/constants';
 import accountImage from '../../images/account.svg';
 import './Navigation.css';
@@ -14,36 +14,36 @@ export default function Navigation() {
         pathname !== '/' ? 
           (<>
             <nav className='navigation__menu'>
-              <Link to={moviesURL} alt='Фильмы' className='navigation__menu-link'>
+              <NavLink  to={moviesURL} alt='Фильмы' className='navigation__menu-link'>
                 Фильмы
-              </Link>
-              <Link
+              </NavLink >
+              <NavLink 
                 to={savedMoviesURL}
                 alt='Сохранённые фильмы'
                 className='navigation__menu-link'
               >
                 Сохранённые фильмы
-              </Link>
+              </NavLink >
             </nav>
 
-            <Link to={profileURL} alt='Профиль' className='navigation__account'>
+            <NavLink  to={profileURL} alt='Профиль' className='navigation__account'>
               Аккаунт
               <img
                 src={accountImage}
                 alt='circle'
                 className='navigation__account-logo'
               />
-            </Link>
+            </NavLink >
           </>)
         :
         (
           <>
-            <Link to={moviesURL} alt='Регистрация' className='navigation__registration'>
+            <NavLink  to={moviesURL} alt='Регистрация' className='navigation__registration'>
               Регистрация
-            </Link>
-            <Link to={moviesURL} alt='Войти' className='navigation__login'>
+            </NavLink >
+            <NavLink  to={moviesURL} alt='Войти' className='navigation__login'>
               Войти
-            </Link>
+            </NavLink >
           </>
         )    
       }
