@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import circleImage from '../../images/circle.svg';
 import { profileURL, moviesURL, savedMoviesURL, signinURL, signupURL } from '../../utils/constants';
 import Navigation from '../Navigation/Navigation';
@@ -12,7 +12,9 @@ export default function Header() {
 
   return ( !isPageNotFound ? (
     <header className={`header ${isSigninSignupURL && 'header_sign'}`}>
-      <img src={circleImage} alt='circle' className='header__logo' />
+      <NavLink to='/' alt='Главная' title='Главная'>
+        <img src={circleImage} alt='circle' className='header__logo' />
+      </NavLink>
 
       {
         !isSigninSignupURL && (

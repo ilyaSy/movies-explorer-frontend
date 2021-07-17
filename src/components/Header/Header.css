@@ -18,7 +18,10 @@
 }
 
 .header__logo {
+  margin: 0 44px 0 0;
+}
+
+.header__logo-image {
   width: 38px;
   height: 38px;
-  margin: 0 44px 0 0;
 }

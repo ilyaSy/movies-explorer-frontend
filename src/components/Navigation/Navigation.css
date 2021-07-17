@@ -23,6 +23,7 @@
   padding: 0;
   color: #000;
   text-decoration: none;
+  transition: opacity 0.3s ease-out;
 }
 
 .navigation__menu-link:not(:last-child) {
@@ -34,6 +35,7 @@
   align-items: center;
   text-decoration: none;
   color: #000;
+  transition: opacity 0.3s ease-out;
 }
 
 .navigation__account-logo {
@@ -49,6 +51,7 @@
 .navigation__registration {
   text-decoration: none;
   color: #000;
+  transition: opacity 0.3s ease-out;
 }
 
 .navigation__login {
@@ -58,4 +61,15 @@
   color: #fff;
   background-color: #000;
   border-radius: 3px;
+  transition: opacity 0.3s ease-out;
+}
+
+.navigation__login:hover {
+  opacity: 0.8;
+}
+
+.navigation__registration:hover,
+.navigation__account:hover,
+.navigation__menu-link:hover {
+  opacity: 0.7;
 }

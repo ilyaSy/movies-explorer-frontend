@@ -4,11 +4,13 @@ import { useState } from 'react';
 import './Profile.css';
 
 export default function Profile() {
-  const [email, setEmail] = useState();
-  const [name, setName] = useState();
+  const [email, setEmail] = useState('kuzya@mail.ru');
+  const [name, setName] = useState('Илья');
+  const [isEditable, setIsEditable] = useState(false);
 
   const handleSetEmail = (event) => setEmail(event.target.value);
   const handleSetName = (event) => setName(event.target.value);
+  const handleSetIsEditable = (event) => setIsEditable(!isEditable);
 
   return (
     <main className='profile'>
@@ -46,13 +48,13 @@ export default function Profile() {
           />
           <p className='profile__error email-error'>Что-то пошло не так...</p>
       </form>
-      {/* <button className='profile__button'>Зарегистрироваться</button>
-      <p className='profile__registration'>
-        Уже зарегистрированы ?
-        <Link to={signupURL} className='profile__registration-link'>
-          Войти
-        </Link>
-      </p> */}
+      {isEditable ? (
+        <button className='profile__button profile__button_type_save' onClick={handleSetIsEditable}>Сохранить</button>
+      )
+      : (
+        <button className='profile__button profile__button_type_edit' onClick={handleSetIsEditable}>Редактировать</button>
+      )}
+      <button className='profile__button profile__button_type_logout'>Выйти из аккаунта</button>
     </main>
   );
 }
