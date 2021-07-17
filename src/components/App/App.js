@@ -5,6 +5,7 @@ import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import {
   signupURL,
@@ -33,7 +34,7 @@ export default function App() {
         </Route>
 
         <Route path={profileURL}>
-          <Login />
+          <Profile />
         </Route>
 
         <Route path={moviesURL}>

@@ -50,6 +50,10 @@
   color: #ff4062;
 }
 
+.registration__input:invalid {
+  box-shadow: none;
+}
+
 .registration__error {
   width: 100%;
   margin: 6px 0 0 0;

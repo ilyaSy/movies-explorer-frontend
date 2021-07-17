@@ -1,61 +1,65 @@
-.login {
+.profile {
   margin: 0 auto;
   padding: 0;
-  max-width: 396px;
+  max-width: 410px;
   width: 100%;
   height: 100%;
 }
 
-.login__title {
-  margin: 40px 0;
+.profile__title {
+  margin: 74px 0;
   padding: 0;
-  text-align: left;
+  text-align: center;
   font-size: 24px;
   line-height: 29.05px;
   font-weight: 500;
 }
 
-.login__fieldset {
-  margin: 0 0 25px 0;
+.profile__fieldset {
+  margin: 123px 0 196px 0;
   width: 100%;
+  font-size: 11px;
+  line-height: 13.31px;
 }
 
-.login__input-label {
-  width: 100%;
-  display: block;
-  font-size: 10px;
-  line-height: 12.1px;
-  font-weight: 400;
-  color: #a0a0a0;
+.profile__input-label {
+  display: inline-block;
+  margin: 0;
+  padding: 5px 0 10px 0;
+  width: 65px;
+  font-weight: 500;
+  border: 0;
+  border-bottom: 1px solid #e8e8e8;
 }
 
-.login__input-label:not(:first-child) {
+.profile__input-label:not(:first-child) {
   margin-top: 6px;
 }
 
-.login__input {
-  width: 100%;
+.profile__input {
+  width: calc(100% - 65px);
   margin: 0;
   padding: 5px 0 10px 0;
-  display: block;
-  font-size: 14px;
-  line-height: 16.94px;
-  font-weight: 500;
-  color: #000;
+  text-align: right;
   border: 0;
   border-bottom: 1px solid #e8e8e8;
   outline: none;
 }
 
-.login__input:not([value=""]):invalid {
+.profile__input:focus, .profile__input:active {
+  border: 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.profile__input:not([value=""]):invalid {
   color: #ff4062;
 }
 
-.login__input:invalid {
+.profile__input:invalid {
   box-shadow: none;
 }
 
-.login__error {
+.profile__error {
   width: 100%;
   margin: 6px 0 0 0;
   padding: 0;
@@ -63,16 +67,17 @@
   display: block;
   color: #ff4062;
   visibility: hidden;
+  text-align: right;
 }
 
-.login__input:not([value=""]):invalid + .login__error {
+.profile__input:not([value=""]):invalid + .profile__error {
   visibility: visible;
 }
 
-.login__button {
+.profile__button {
   width: 100%;
   text-align: center;
-  margin: 179px 0 0 0;
+  margin: 69px 0 0 0;
   padding: 13px 0 15px 0;
   font-weight: 400;
   font-size: 14px;
@@ -83,13 +88,13 @@
   border: 0;
 }
 
-.login__registration {
+.profile__registration {
   width: 100%;
   text-align: center;
   color: #a0a0a0;
 }
 
-.login__registration-link {
+.profile__registration-link {
   margin: 0 0 0 6px;
   padding: 0;
   text-decoration: none;
