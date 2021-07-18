@@ -14,13 +14,19 @@ export default function Navigation() {
         pathname !== '/' ? 
           (<>
             <nav className='navigation__menu'>
-              <NavLink  to={moviesURL} alt='Фильмы' className='navigation__menu-link'>
+              <NavLink 
+                to={moviesURL}
+                alt='Фильмы'
+                className='navigation__menu-link'
+                activeClassName='navigation__menu-link_bold'
+              >
                 Фильмы
               </NavLink >
               <NavLink 
                 to={savedMoviesURL}
                 alt='Сохранённые фильмы'
                 className='navigation__menu-link'
+                activeClassName='navigation__menu-link_bold'
               >
                 Сохранённые фильмы
               </NavLink >

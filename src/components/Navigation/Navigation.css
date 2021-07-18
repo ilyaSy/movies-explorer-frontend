@@ -26,6 +26,10 @@
   transition: opacity 0.3s ease-out;
 }
 
+.navigation__menu-link_bold {
+  font-weight: 500;
+}
+
 .navigation__menu-link:not(:last-child) {
   margin-right: 16px;
 }
