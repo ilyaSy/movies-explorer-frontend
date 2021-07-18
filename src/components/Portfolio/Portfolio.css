@@ -19,7 +19,7 @@
 }
 
 .portfolio__links-item {
-  
+  margin: 0;
 }
 
 .portfolio__links-item:not(:first-child) {
@@ -41,6 +41,10 @@
   text-decoration: none;
   display: flex;
   justify-content: space-between;
+
+  background-image: url('../../images/arrowDiag.svg');
+  background-position: right;
+  background-repeat: no-repeat;
 }
 
 .portfolio__link:hover {

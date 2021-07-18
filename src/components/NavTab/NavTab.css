@@ -1,0 +1,29 @@
+.main-nav {
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav__item {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  width: 96px;
+  border-radius: 10px;
+  background-color: #e8e8e8;
+}
+
+.main-nav__item:not(:last-child) {
+  margin-right: 10px;
+}
+
+.main-nav__link {
+  display: block;
+  margin: 0;
+  padding: 10px 0;
+  color: #fff;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  text-decoration: none;
+}

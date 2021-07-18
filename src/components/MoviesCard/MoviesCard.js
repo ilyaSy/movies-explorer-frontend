@@ -23,7 +23,7 @@ export default function MoviesCard({ movie }) {
       {
         pathname === savedMoviesURL ? (
           <button type='button' className='movie__button movie__button_type_delete'>
-            <img src={movieDeletePic} className='movie__delete-pic' />
+            <img src={movieDeletePic} alt='Удалить' className='movie__delete-pic' />
           </button>
         ) : (
           saved ? (
@@ -37,7 +37,7 @@ export default function MoviesCard({ movie }) {
       }
       <img
         src={image}
-        alt='Изображение не может быть показано'
+        alt={`Изображение ${id} не может быть показано`}
         className='movie__picture'
       />
       <figcaption className='movie__caption'>

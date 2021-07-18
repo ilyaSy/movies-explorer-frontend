@@ -4,7 +4,7 @@ import './AboutMe.css';
 
 export default function AboutMe() {
   return (
-    <section className='student'>
+    <section id='student' className='student'>
       <MainHeader title='Студент' />
 
       <div className='student__info-block'>
