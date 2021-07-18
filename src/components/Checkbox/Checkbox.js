@@ -11,6 +11,7 @@ export default function Checkbox({name, value, onChange}) {
         name={name}
         className='checkbox__input'
         checked={value}
+        onChange={onChange}
       />
     </span>
   );
