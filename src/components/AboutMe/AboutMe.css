@@ -1,0 +1,85 @@
+.student {
+  margin: 0 auto;
+  padding: 0 70px 51px 70px;
+}
+
+.student__info-block {
+  margin: 66px 0 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0 270px;
+  grid-template-columns: 1fr min-content;
+  grid-template-areas:
+    'info photo'
+    'links photo';
+}
+
+.student__info-text {
+  grid-area: info;
+  margin: 0;
+  padding: 0;
+}
+
+.student__info-photo {
+  grid-area: photo;
+  margin: 0;
+  padding: 0;
+  border-radius: 10px;
+  max-height: 270px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.student__info-name {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+}
+
+.student__info-job {
+  margin: 18px 0 0 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.student__info-description {
+  margin: 26px 0 0 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.student__info-links{
+  grid-area: links;
+  align-self: end;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.student__info-links-item{
+  margin: 0;
+  padding: 0 20px 0 0;
+  display: inline;
+}
+
+.student__info-link{
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: #000;
+  transition: opacity 0.3s ease-out;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16.94px;
+}
+
+.student__info-link:hover {
+  opacity: 0.7;
+}
