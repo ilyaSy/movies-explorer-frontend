@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 import Main from '../Main/Main';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
@@ -53,7 +54,7 @@ export default function App() {
         </Route>
 
         <Route path={savedMoviesURL}>
-          <Login />
+          <SavedMovies />
         </Route>
 
         <Route path='*'>

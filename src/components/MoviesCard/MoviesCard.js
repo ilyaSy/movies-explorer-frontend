@@ -1,9 +1,15 @@
+import { useLocation } from 'react-router-dom';
+import { savedMoviesURL } from '../../utils/constants';
 import { getHours, getMinutes } from 'date-fns';
 import movieSavedPic from '../../images/save.svg';
+import movieDeletePic from '../../images/delete.svg';
 import './MoviesCard.css';
 
 export default function MoviesCard({ movie }) {
   const { id, image, description, duration, saved } = movie;
+
+  const location = useLocation();
+  const pathname = location.pathname;
 
   const convertDuration = (seconds) => {
     const date = new Date(seconds * 1000);
@@ -15,12 +21,18 @@ export default function MoviesCard({ movie }) {
   return (
     <figure className='movie'>
       {
-        saved ? (
-          <img src={movieSavedPic} alt='Сохранено' className='movie_saved' />
+        pathname === savedMoviesURL ? (
+          <button type='button' className='movie__button movie__button_type_delete'>
+            <img src={movieDeletePic} className='movie__delete-pic' />
+          </button>
         ) : (
-        <button type='button' class='movie__button'>
-          Сохранить
-        </button>
+          saved ? (
+            <img src={movieSavedPic} alt='Сохранено' className='movie_saved' />
+          ) : (
+            <button type='button' className='movie__button movie__button_type_saved'>
+              Сохранить
+            </button>
+          )
         )
       }
       <img

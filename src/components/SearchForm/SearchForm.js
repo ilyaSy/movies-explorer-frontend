@@ -14,7 +14,7 @@ export default function SearchForm() {
         <button className='search-form__input-button'>Найти</button>
       </div>
       <label className='search-form__checkbox-block'>
-        <Checkbox value={shortFilm} onChange={handleSetShortFilm} />
+        <Checkbox name='shortFilm' value={shortFilm} onChange={handleSetShortFilm} />
         <p className='search-form__checkbox-title'>Короткометражки</p>
       </label>
     </form>

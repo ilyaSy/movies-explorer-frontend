@@ -1,6 +1,6 @@
 import './Checkbox.css';
 
-export default function Checkbox({value, onChange}) {
+export default function Checkbox({name, value, onChange}) {
   return (
     <span
       className={`checkbox ${value && 'checkbox_checked'}`}
@@ -8,7 +8,7 @@ export default function Checkbox({value, onChange}) {
     >
       <input
         type='checkbox'
-        name='shortFilm'
+        name={name}
         className='checkbox__input'
         checked={value}
       />
