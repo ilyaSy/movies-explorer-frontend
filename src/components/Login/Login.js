@@ -49,7 +49,7 @@ export default function Login() {
       </form>
       <button className='login__button'>Войти</button>
       <p className='login__registration'>
-        Ещё не зарегистрированы ?
+        Ещё не зарегистрированы?
         <Link to={signupURL} className='login__registration-link'>
           Регистрация
         </Link>

@@ -1,12 +1,14 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Movies from '../Movies/Movies';
 import Main from '../Main/Main';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import {CurrentUserContext} from '../../contexts/CurrentUserContext';
 import {
   signupURL,
   signinURL,
@@ -17,8 +19,17 @@ import {
 import './App.css';
 
 export default function App() {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    setCurrentUser({
+      name: 'Илья',
+      email: 'kuzya@yandex.ru'
+    });
+  }, []);
+
   return (
-    <>
+    <CurrentUserContext.Provider value={currentUser}>
       <Header />
       <Switch>
         <Route exact path='/'>
@@ -38,7 +49,7 @@ export default function App() {
         </Route>
 
         <Route path={moviesURL}>
-          <Login />
+          <Movies />
         </Route>
 
         <Route path={savedMoviesURL}>
@@ -50,6 +61,6 @@ export default function App() {
         </Route>
       </Switch>
       <Footer />
-    </>
+    </CurrentUserContext.Provider>
   );
 }
