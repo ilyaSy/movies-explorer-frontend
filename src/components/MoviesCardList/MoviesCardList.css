@@ -4,3 +4,22 @@
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   gap: 60px 30px;
 }
+
+.movies-list__button {
+  display: block;
+  margin: 50px auto 80px auto;
+  padding: 11px 60px 9px 60px;
+  text-align: center;
+  width: 320px;
+  background-color: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14.52px;
+  transition: opacity 0.3s ease-out;
+}
+
+.movies-list__button:hover {
+  opacity: 0.8;
+}

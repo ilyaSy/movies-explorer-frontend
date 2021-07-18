@@ -66,3 +66,12 @@
 .movie__button:hover {
   opacity: 0.8;
 }
+
+.movie_saved {
+  position:absolute;
+  top: 14px;
+  right: 14px;
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+}

@@ -1,0 +1,17 @@
+.checkbox {
+  margin: 0 12px 0 0;
+  padding: 0;
+  width: 36px;
+  height: 20px;
+  background-image: url('../../images/checkboxOff.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.checkbox_checked {
+  background-image: url('../../images/checkboxOn.svg');
+}
+
+.checkbox__input {
+  display: none;
+}
