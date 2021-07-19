@@ -79,6 +79,7 @@
 }
 
 .navigation__burger-menu-button {
+  cursor: pointer;
   margin: 0;
   padding: 0;
   width: 44px;
@@ -89,6 +90,11 @@
   background-color: #fff;
   border: 0;
   display: none;
+  transition: opacity 0.3s ease-out;
+}
+
+.navigation__burger-menu-button:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 768px) {
