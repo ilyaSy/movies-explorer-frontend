@@ -1,6 +1,7 @@
 .main-nav {
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
 }
 
 .main-nav__item {
@@ -26,4 +27,9 @@
   line-height: 16px;
   text-align: center;
   text-decoration: none;
+  transition: opacity 0.3s ease-out;
+}
+
+.main-nav__link:hover {
+  opacity: 0.8;
 }

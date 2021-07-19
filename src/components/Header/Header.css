@@ -14,7 +14,7 @@
 .header_sign {
   max-width: 396px;
   width: 100%;
-  padding: 70px 0 0 0;
+  padding: 0;
 }
 
 .header__logo {
@@ -24,4 +24,29 @@
 .header__logo-image {
   width: 38px;
   height: 38px;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 456px) {
+  .header {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+@media screen and (max-width: 456px) {
+  .header_sign {
+    padding-top: 56px;
+    justify-content: center;
+  }
+
+  .header__logo {
+    margin: 0;
+  }
 }

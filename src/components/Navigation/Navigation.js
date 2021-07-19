@@ -1,9 +1,16 @@
+import { useState } from 'react';
 import { NavLink , useLocation } from 'react-router-dom';
-import { profileURL, moviesURL, savedMoviesURL } from '../../utils/constants';
+import { profileURL, moviesURL, savedMoviesURL, signinURL, signupURL } from '../../utils/constants';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import accountImage from '../../images/account.svg';
 import './Navigation.css';
 
 export default function Navigation() {
+  const [isBurgerOpened, setIsBurgerOpened] = useState(false);
+
+  const handleBurgerMenuOpen = () => setIsBurgerOpened(true);
+  const handleBurgerMenuClose = () => setIsBurgerOpened(false);
+
   const location = useLocation();
   const pathname = location.pathname;
   const main = pathname === '/' ? true : false;
@@ -44,16 +51,19 @@ export default function Navigation() {
         :
         (
           <>
-            <NavLink  to={moviesURL} alt='Регистрация' className='navigation__registration'>
+            <NavLink  to={signupURL} alt='Регистрация' className='navigation__registration'>
               Регистрация
             </NavLink >
-            <NavLink  to={moviesURL} alt='Войти' className='navigation__login'>
+            <NavLink  to={signinURL} alt='Войти' className='navigation__login'>
               Войти
             </NavLink >
           </>
         )    
       }
       
+      <button className='navigation__burger-menu-button' onClick={handleBurgerMenuOpen}></button>
+
+      <BurgerMenu isOpened={isBurgerOpened} onClose={handleBurgerMenuClose}/>
     </div>
   );
 }

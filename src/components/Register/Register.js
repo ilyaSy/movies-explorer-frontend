@@ -64,9 +64,9 @@ export default function Register() {
         </label>
       </form>
       <button className='registration__button'>Зарегистрироваться</button>
-      <p className='registration__registration'>
+      <p className='registration__login'>
         Уже зарегистрированы?
-        <Link to={signupURL} className='registration__registration-link'>
+        <Link to={signupURL} className='registration__login-link'>
           Войти
         </Link>
       </p>

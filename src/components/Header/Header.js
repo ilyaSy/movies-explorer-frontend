@@ -5,6 +5,7 @@ import Navigation from '../Navigation/Navigation';
 import './Header.css';
 
 export default function Header() {
+  
   const location = useLocation();
   const pathname = location.pathname;
   const isPageNotFound = ['/', profileURL, moviesURL, savedMoviesURL, signinURL, signupURL].includes(pathname) ? false : true;
@@ -20,7 +21,7 @@ export default function Header() {
         !isSigninSignupURL && (
           <Navigation />
         )
-      }      
+      }
     </header>
     ) : (
     <></>

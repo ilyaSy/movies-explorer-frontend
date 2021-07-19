@@ -116,3 +116,31 @@
 .profile__button_type_save:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 470px) {
+  .profile {
+    margin: 0 30px;
+    height: 100%;
+    width: unset;
+    padding-bottom: 40px;
+  }
+
+  .profile__title {
+    margin: 70px 0 80px 0;
+    text-align: center;
+  }
+
+  .profile__fieldset {
+    margin: 0;
+    height: calc(100% - 226px);
+  }
+
+  .profile__button {
+    font-size: 12px;
+    line-height: 14.52px;
+  }
+
+  .registration__button {
+    margin-top: 0;
+  }
+}
