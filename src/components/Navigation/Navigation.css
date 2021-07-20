@@ -99,7 +99,7 @@
 
 @media screen and (max-width: 768px) {
   .navigation {
-    justify-content: right;
+    justify-content: flex-end;
   }
 
   .navigation__menu,

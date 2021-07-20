@@ -1,5 +1,6 @@
 .burger {
-  position: absolute;
+  /* position: absolute; */
+  position: fixed;
   overflow-x: hidden;
   top: 0;
   left: 0;
