@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Checkbox from '../Checkbox/Checkbox';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
 export default function SearchForm() {
@@ -13,10 +13,13 @@ export default function SearchForm() {
         <input type='text' placeholder='Фильм' className='search-form__input' />
         <button className='search-form__input-button'>Найти</button>
       </div>
-      <label className='search-form__checkbox-block'>
-        <Checkbox name='shortFilm' value={shortFilm} onChange={handleSetShortFilm} />
+
+      <FilterCheckbox name='shortFilm' text="Короткометражки" value={shortFilm} onChange={handleSetShortFilm} />
+
+      {/* <label className='search-form__checkbox-block'>
+        <FilterCheckbox name='shortFilm' value={shortFilm} onChange={handleSetShortFilm} />
         <p className='search-form__checkbox-title'>Короткометражки</p>
-      </label>
+      </label> */}
     </form>
   );
 }
