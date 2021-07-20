@@ -9,17 +9,12 @@ export default function SearchForm() {
 
   return (
     <form action='/' name='search-form' className='search-form'>
-      <div className='search-form__input-block'>
+      <fieldset className='search-form__fieldset'>
         <input type='text' placeholder='Фильм' className='search-form__input' />
         <button className='search-form__input-button'>Найти</button>
-      </div>
+      </fieldset>
 
       <FilterCheckbox name='shortFilm' text="Короткометражки" value={shortFilm} onChange={handleSetShortFilm} />
-
-      {/* <label className='search-form__checkbox-block'>
-        <FilterCheckbox name='shortFilm' value={shortFilm} onChange={handleSetShortFilm} />
-        <p className='search-form__checkbox-title'>Короткометражки</p>
-      </label> */}
     </form>
   );
 }
