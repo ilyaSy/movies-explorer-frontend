@@ -30,3 +30,13 @@
 .checkbox__input {
   display: none;
 }
+
+@media screen and (max-width: 456px) {
+  .checkbox {
+    font-size: 11px;
+  }
+
+  .checkbox__pic {
+    margin-right: 13px;
+  }
+}
