@@ -4,6 +4,8 @@
   margin: 0 auto 140px auto;
   padding: 10px 70px 0 70px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 @media screen and (max-width: 770px) {
