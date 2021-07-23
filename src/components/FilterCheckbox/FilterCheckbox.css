@@ -6,6 +6,12 @@
   font-size: 14px;
   line-height: 18px;
   width: max-content;
+  cursor: pointer;
+  transition: opactity 0.3s ease-out;
+}
+
+.checkbox:hover {
+  opacity: 0.8;
 }
 
 .checkbox-title {
