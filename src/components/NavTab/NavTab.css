@@ -33,3 +33,18 @@
 .main-nav__link:hover {
   opacity: .8;
 }
+
+@media screen and (max-width: 456px) {
+  .main-nav__item {
+    width: 82px;
+  }
+
+  .main-nav__link {
+    font-size: 10px;
+    padding: 5px 0;
+  }
+
+  .main-nav__item:not(:last-child) {
+    margin-right: 6px;
+  }
+}

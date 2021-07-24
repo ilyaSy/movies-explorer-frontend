@@ -24,3 +24,39 @@
   line-height: 58px;
   letter-spacing: -0.04em;
 }
+
+@media screen and (max-width: 768px) {
+  .promo {
+    margin: 0;
+    padding: 20px 20px 0 20px;
+  }
+
+  .promo__container {
+    padding-top: 34.2vh;
+  }
+
+  .promo__title {
+    max-width: 680px;
+    margin-bottom: 30.7vh;
+    font-size: 40px;
+    line-height: 52px;
+  }
+}
+
+@media screen and (max-width: 456px) {
+  .promo {
+    margin: 0;
+    padding: 14px 14px 0 14px;
+  }
+
+  .promo__container {
+    margin: 0;
+    padding: 28.2vh 0 30px 0;
+  }
+
+  .promo__title {
+    margin-bottom: 27.2vh;
+    font-size: 29px;
+    line-height: 37px;
+  }
+}
