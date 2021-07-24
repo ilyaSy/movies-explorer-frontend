@@ -8,7 +8,10 @@
   padding: 0;
   display: grid;
   gap: 26px 40px;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, 1fr);
+  grid-template-areas:
+    'title1 title2'
+    'text1 text2';
 }
 
 .project__details-title {
@@ -20,12 +23,28 @@
   letter-spacing: -0.04em;
 }
 
+.project__details-title_t1 {
+  grid-area: title1;
+}
+
+.project__details-title_t2 {
+  grid-area: title2;
+}
+
 .project__details-text {
   margin: 0;
   padding: 0;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+}
+
+.project__details-text_t1 {
+  grid-area: text1;
+}
+
+.project__details-text_t2 {
+  grid-area: text2;
 }
 
 .project__progress {
@@ -61,4 +80,63 @@
 .project__progress-title-front {
   margin: 0;
   padding: 9px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .project {
+    padding: 0 50px 90px 50px;
+  }
+
+  .project__details-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .project__progress {
+    margin-top: 93px;
+  }
+}
+
+@media screen and (max-width: 581px) {
+  .project {
+    padding: 0 18px 70px 18px;
+  }
+
+  .project__details {
+    margin-top: 60px;
+    grid-template-areas:
+      'title1'
+      'text1'
+      'title2'
+      'text2';
+  }
+
+  .project__details-title {
+    font-size: 18px;
+    line-height: 21.78px;
+  }
+
+  .project__details-text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .project__progress {
+    margin-top: 60px;
+    font-size: 11px;
+    line-height: 13.31px;
+  }
+
+  .project__progress-week-back {
+    padding: 11px 0;
+  }
+  
+  .project__progress-week-front {
+    padding: 11px 0;
+  }
+
+  .project__progress-title-back,
+  .project__progress-title-front {
+    padding-top: 10px;
+  }
 }
