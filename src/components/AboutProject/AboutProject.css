@@ -98,6 +98,12 @@
   }
 }
 
+@media screen and (max-width: 600px) {
+  .project__progress {
+    grid-template-columns: 100px 1fr;
+  }
+}
+
 @media screen and (max-width: 581px) {
   .project {
     padding: 0 18px 70px 18px;
@@ -126,7 +132,6 @@
     margin-top: 60px;
     font-size: 11px;
     line-height: 13.31px;
-    grid-template-columns: 35.21% 1fr;
   }
 
   .project__progress-week-back {

@@ -65,7 +65,7 @@
   background-color: #fff;
   border: 0;
   transition: opacity .3s ease-out;
-  align-self: end;
+  align-self: flex-end;
 }
 
 .burger__button-close:hover {
@@ -90,7 +90,8 @@
 }
 
 .burger__menu-link_underlined {
-  text-decoration: underline;
+  border-bottom: 2px solid #000;
+  padding-bottom: 2px;
 }
 
 .burger__account {
