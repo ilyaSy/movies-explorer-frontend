@@ -36,7 +36,7 @@
   font-size: 30px;
   line-height: 50px;
   letter-spacing: -0.04em;
-  transition: opacity 0.3s ease-out;
+  transition: opacity .3s ease-out;
   color: #000;
   text-decoration: none;
   display: flex;
@@ -48,5 +48,5 @@
 }
 
 .portfolio__link:hover {
-  opacity: 0.7;
+  opacity: .7;
 }

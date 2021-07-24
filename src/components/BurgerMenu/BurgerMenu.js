@@ -27,6 +27,7 @@ export default function BurgerMenu({ isOpened, onClose }) {
               to='/'
               className='burger__menu-link'
               activeClassName='burger__menu-link_underlined'
+              onClick={onClose}
             >
               Главная
             </NavLink>
@@ -36,6 +37,7 @@ export default function BurgerMenu({ isOpened, onClose }) {
               to={moviesURL}
               className='burger__menu-link'
               activeClassName='burger__menu-link_underlined'
+              onClick={onClose}
             >
               Фильмы
             </NavLink>
@@ -45,13 +47,14 @@ export default function BurgerMenu({ isOpened, onClose }) {
               to={savedMoviesURL}
               className='burger__menu-link'
               activeClassName='burger__menu-link_underlined'
+              onClick={onClose}
             >
               Сохранённые фильмы
             </NavLink>
           </li>
         </ul>
 
-        <NavLink to={profileURL} alt='Профиль' className='burger__account'>
+        <NavLink to={profileURL} alt='Профиль' className='burger__account' onClick={onClose}>
           Аккаунт
           <img
             src={accountImage}

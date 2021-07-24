@@ -27,9 +27,9 @@
   line-height: 16px;
   text-align: center;
   text-decoration: none;
-  transition: opacity 0.3s ease-out;
+  transition: opacity .3s ease-out;
 }
 
 .main-nav__link:hover {
-  opacity: 0.8;
+  opacity: .8;
 }

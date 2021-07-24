@@ -17,6 +17,11 @@
   padding: 0;
 }
 
+.header__logo-link {
+  font-size: 0;
+  line-height: 0;
+}
+
 .header__logo {
   margin: 0 44px 0 0;
 }
