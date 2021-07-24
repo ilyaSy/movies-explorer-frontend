@@ -37,7 +37,6 @@
 
 .techs__list-item {
   margin: 0;
-  /* margin: 10px 0 0 0; */
   padding: 21px 0 22px 0;
   width: 90px;
   height: 60px;
@@ -51,10 +50,6 @@
   letter-spacing: -0.04em;
   box-sizing: border-box;
 }
-
-/* .techs__list-item:not(:last-child) {
-  margin-right: 10px;
-} */
 
 @media screen and (max-width: 848px) {
   .techs {
