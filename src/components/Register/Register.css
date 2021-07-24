@@ -83,7 +83,7 @@
 .registration__button {
   width: 100%;
   text-align: center;
-  margin: 69px 0 0 0;
+  margin: 0;
   padding: 13px 0 15px 0;
   font-weight: 400;
   font-size: 14px;
@@ -122,11 +122,34 @@
   opacity: .8;
 }
 
+.registration__error-update {
+  visibility: hidden;
+  margin: 35px 0 20px 0;
+  padding: 0;
+  text-align: center;
+  font-size: 11px;
+  line-height: 13.31px;
+  color: #ff004c;
+}
+
+.registration__error-update_opened {
+  visibility: visible;
+}
+
 @media screen and (max-width: 456px) {
   .registration {
     margin: 0 30px;
     height: 100%;
     width: unset;
+  }
+
+  .registration__form {
+    height: calc(100% - 218px);
+  }
+
+  .registration__fieldset {
+    margin: 0;
+    height: 100%;
   }
 
   .registration__title {
@@ -140,8 +163,11 @@
     line-height: 14.52px;
   }
 
+  .registration__error-update {
+    margin-top: 0;
+  }
+
   .registration__button {
-    margin-top: 157px;
     font-size: 12px;
     line-height: 14.52px;
   }

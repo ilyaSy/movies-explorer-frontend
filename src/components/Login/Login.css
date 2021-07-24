@@ -83,7 +83,7 @@
 .login__button {
   width: 100%;
   text-align: center;
-  margin: 179px 0 0 0;
+  margin: 0;
   padding: 13px 0 15px 0;
   font-weight: 400;
   font-size: 14px;
@@ -97,6 +97,7 @@
 
 .login__registration {
   margin: 16px 0 0 0;
+  padding: 0;
   width: 100%;
   text-align: center;
   color: #a0a0a0;
@@ -122,12 +123,34 @@
   opacity: .8;
 }
 
+.login__error-update {
+  visibility: hidden;
+  margin: 145px 0 20px 0;
+  padding: 0;
+  text-align: center;
+  font-size: 11px;
+  line-height: 13.31px;
+  color: #ff004c;
+}
+
+.login__error-update_opened {
+  visibility: visible;
+}
+
 @media screen and (max-width: 456px) {
   .login {
     margin: 0 30px;
     height: 100%;
     width: unset;
-    padding-bottom: 30px;
+  }
+
+  .login__form {
+    height: calc(100% - 218px);
+  }
+
+  .login__fieldset {
+    margin: 0;
+    height: 100%;
   }
 
   .login__title {
@@ -141,8 +164,11 @@
     line-height: 14.52px;
   }
 
-  .login__button {
-    margin-top: 267px;
+  .login__error-update {
+    margin-top: 0;
+  }
+
+  .login__button {    
     font-size: 12px;
     line-height: 14.52px;
   }

@@ -7,15 +7,21 @@ export default function Register() {
   const [email, setEmail] = useState();
   const [name, setName] = useState();
   const [password, setPassword] = useState();
+  const [isErroneous, setIsErroneous] = useState(false);
 
   const handleSetEmail = (event) => setEmail(event.target.value);
   const handleSetName = (event) => setName(event.target.value);
   const handleSetPassword = (event) => setPassword(event.target.value);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setIsErroneous(true);
+  }
+
   return (
     <main className='registration'>
       <h1 className='registration__title'>Добро пожаловать!</h1>
-      <form action='/' name='signup' className='registration__form'>
+      <form action='/' name='signup' className='registration__form' onSubmit={handleSubmit}>
         <fieldset className='registration__fieldset'>
           <label className='registration__input-label'>
             Имя
@@ -64,7 +70,11 @@ export default function Register() {
             <p className='registration__error password-error'>Что-то пошло не так...</p>
           </label>
         </fieldset>
-        <button className='registration__button'>Зарегистрироваться</button>
+
+        <p className={`registration__error-update ${isErroneous && 'registration__error-update_opened'}`}>
+          При регистрации пользователя произошла ошибка
+        </p>
+        <button className='registration__button' type='submit'>Зарегистрироваться</button>
       </form>
       <p className='registration__login'>
         Уже зарегистрированы?

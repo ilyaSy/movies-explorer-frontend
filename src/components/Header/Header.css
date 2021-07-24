@@ -43,9 +43,7 @@
     padding-left: 18px;
     padding-right: 18px;
   }
-}
-
-@media screen and (max-width: 456px) {
+  
   .header_sign {
     padding-top: 56px;
     justify-content: center;
