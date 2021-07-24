@@ -50,3 +50,32 @@
 .portfolio__link:hover {
   opacity: .7;
 }
+
+@media screen and (max-width: 848px) {
+  .portfolio {
+    padding: 50px 50px 90px 50px;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+  }  
+}
+
+@media screen and (max-width: 581px) {
+  .portfolio {
+    padding: 30px 14px 70px 14px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+  }
+
+  .portfolio__links {
+    margin-top: 40px;
+  }
+
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 28px;
+  } 
+}
