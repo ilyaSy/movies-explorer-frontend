@@ -5,12 +5,12 @@ import { movies } from '../../utils/testData';
 import Preloader from '../Preloader/Preloader';
 import './SavedMovies.css';
 
-export default function Movies () {
+export default function SavedMovies () {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
-      setIsLoaded(true);
+      setIsLoaded(false);
     }, 1000);
   }, []);
 
