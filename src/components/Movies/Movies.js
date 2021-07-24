@@ -10,7 +10,7 @@ export default function Movies () {
 
   useEffect(() => {
     setTimeout(() => {
-      setIsLoaded(false);
+      setIsLoaded(true);
     }, 1000);
   }, []);
 

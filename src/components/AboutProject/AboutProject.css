@@ -94,6 +94,7 @@
 
   .project__progress {
     margin-top: 93px;
+    grid-template-columns: 20.958% 1fr;
   }
 }
 
@@ -125,6 +126,7 @@
     margin-top: 60px;
     font-size: 11px;
     line-height: 13.31px;
+    grid-template-columns: 35.21% 1fr;
   }
 
   .project__progress-week-back {

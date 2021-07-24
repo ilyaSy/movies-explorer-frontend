@@ -10,7 +10,7 @@ export default function SavedMovies () {
 
   useEffect(() => {
     setTimeout(() => {
-      setIsLoaded(false);
+      setIsLoaded(true);
     }, 1000);
   }, []);
 
