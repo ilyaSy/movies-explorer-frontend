@@ -6,9 +6,10 @@
   line-height: 26.63px;
   letter-spacing: -0.04em;
   font-weight: 400;
+  width: 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 848px) {
   .main-header {
     padding-top: 90px;
   }
