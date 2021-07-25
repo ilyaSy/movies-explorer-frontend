@@ -17,6 +17,10 @@
 
 * JS
 
+* Макет на Figma
+
+[Макет](https://www.figma.com/file/i93fsLTnGnEECzaX4X9Ck7/Diploma-Copy?node-id=891%3A3857)
+
 [Смотреть](https://ilya.nomoredomains.club)
 [Адрес api](https://api.ilya.nomoredomains.club)
 -----

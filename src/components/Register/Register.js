@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { signupURL } from '../../utils/constants';
+import { signinURL } from '../../utils/constants';
 import './Register.css';
 
 export default function Register() {
@@ -36,7 +36,7 @@ export default function Register() {
               value={name}
               onChange={handleSetName}
             />
-            <p className='registration__error name-error'>Что-то пошло не так...</p>
+            <p className='registration__error name-error'>Некорректная длина имени или использованы спецсимволы</p>
           </label>
 
           <label className='registration__input-label'>
@@ -52,7 +52,7 @@ export default function Register() {
               value={email}
               onChange={handleSetEmail}
             />
-            <p className='registration__error email-error'>Что-то пошло не так...</p>
+            <p className='registration__error email-error'>Некорректный формат E-mail</p>
           </label>
 
           <label className='registration__input-label'>
@@ -67,7 +67,7 @@ export default function Register() {
               value={password}
               onChange={handleSetPassword}
             />
-            <p className='registration__error password-error'>Что-то пошло не так...</p>
+            <p className='registration__error password-error'>Некорректная длина пароля</p>
           </label>
         </fieldset>
 
@@ -78,7 +78,7 @@ export default function Register() {
       </form>
       <p className='registration__login'>
         Уже зарегистрированы?
-        <Link to={signupURL} className='registration__login-link'>
+        <Link to={signinURL} className='registration__login-link'>
           Войти
         </Link>
       </p>

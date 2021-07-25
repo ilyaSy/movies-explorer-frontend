@@ -61,11 +61,6 @@
   border-bottom: 1px solid #e8e8e8;
 }
 
-.profile__input:focus, .profile__input:active {
-  border: 0;
-  border-bottom: 1px solid #e8e8e8;
-}
-
 .profile__input:not([value=""]):invalid {
   color: #ff4062;
 }

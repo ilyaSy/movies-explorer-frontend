@@ -42,7 +42,7 @@ export default function Profile() {
             value={name}
             onChange={handleSetName}
           />
-          <p className='profile__error name-error'>Что-то пошло не так...</p>
+          <p className='profile__error name-error'>Некорректная длина имени или использованы спецсимволы</p>
 
           <label className='profile__input-label'>E-mail</label>
           <input
@@ -56,7 +56,6 @@ export default function Profile() {
             value={email}
             disabled
           />
-          {/* <p className='profile__error email-error'>Что-то пошло не так...</p> */}
         </fieldset>
 
         <p className={`profile__error-update ${isErroneous && 'profile__error-update_opened'}`}>

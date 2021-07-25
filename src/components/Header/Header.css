@@ -36,6 +36,11 @@
     padding-left: 30px;
     padding-right: 30px;
   }
+
+  .header_sign {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 }
 
 @media screen and (max-width: 456px) {
@@ -46,6 +51,8 @@
   
   .header_sign {
     padding-top: 56px;
+    padding-left: 0px;
+    padding-right: 0px;
     justify-content: center;
   }
 

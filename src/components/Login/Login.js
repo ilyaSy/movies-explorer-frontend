@@ -35,7 +35,7 @@ export default function Login() {
               value={email}
               onChange={handleSetEmail}
             />
-            <p className='login__error email-error'>Что-то пошло не так...</p>
+            <p className='login__error email-error'>Некорректный формат E-mail</p>
           </label>
 
           <label className='login__input-label'>
@@ -51,7 +51,7 @@ export default function Login() {
               value={password}
               onChange={handleSetPassword}
             />
-            <p className='login__error password-error'>Что-то пошло не так...</p>
+            <p className='login__error password-error'>Некорректная длина пароля</p>
           </label>
         </fieldset>
 
