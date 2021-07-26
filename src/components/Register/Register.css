@@ -1,0 +1,174 @@
+.registration {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 396px;
+  width: 100%;
+}
+
+.registration__title {
+  margin: 40px 0;
+  padding: 0;
+  text-align: left;
+  font-size: 24px;
+  line-height: 29.05px;
+  font-weight: 500;
+}
+
+.registration__form {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registration__fieldset {
+  margin: 0 0 65px 0;
+  padding: 0;
+  width: 100%;
+  border: 0;
+}
+
+.registration__input-label {
+  width: 100%;
+  display: block;
+  font-size: 10px;
+  line-height: 12.1px;
+  font-weight: 400;
+  color: #a0a0a0;
+}
+
+.registration__input-label:not(:first-child) {
+  margin-top: 6px;
+}
+
+.registration__input {
+  width: 100%;
+  margin: 0;
+  padding: 5px 0 10px 0;
+  display: block;
+  font-size: 14px;
+  line-height: 16.94px;
+  font-weight: 500;
+  color: #000;
+  border: 0;
+  border-bottom: 1px solid #e8e8e8;
+  outline: none;
+}
+
+.registration__input:not([value=""]):invalid {
+  color: #ff4062;
+}
+
+.registration__input:invalid {
+  box-shadow: none;
+}
+
+.registration__error {
+  width: 100%;
+  margin: 6px 0 0 0;
+  padding: 0;
+  content: '';
+  font-size: 10px;
+  line-height: 12.1px;
+  display: block;
+  color: #ff4062;
+  visibility: hidden;
+}
+
+.registration__input:not([value=""]):invalid + .registration__error {
+  visibility: visible;
+}
+
+.registration__button {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 13px 0 15px 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.94px;
+  color: #fff;
+  background-color: #000;
+  border-radius: 3px;
+  border: 0;
+  transition: opacity .3s ease-out;
+}
+
+.registration__login {
+  margin: 14px 0 0 0;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+  color: #a0a0a0;
+  font-size: 14px;
+  line-height: 16.94px;
+}
+
+.registration__login-link {
+  margin: 0 0 0 6px;
+  padding: 0;
+  text-decoration: none;
+  text-align: center;
+  color: #000;
+  transition: opacity .3s ease-out;
+}
+
+.registration__login-link:hover {
+  opacity: .7;
+}
+
+.registration__button:hover {
+  opacity: .8;
+}
+
+.registration__error-update {
+  visibility: hidden;
+  margin: 35px 0 20px 0;
+  padding: 0;
+  text-align: center;
+  font-size: 11px;
+  line-height: 13.31px;
+  color: #ff004c;
+}
+
+.registration__error-update_opened {
+  visibility: visible;
+}
+
+@media screen and (max-width: 456px) {
+  .registration {
+    margin: 0 30px;
+    height: 100%;
+    width: unset;
+  }
+
+  .registration__form {
+    height: calc(100% - 218px);
+  }
+
+  .registration__fieldset {
+    margin: 0;
+    height: 100%;
+  }
+
+  .registration__title {
+    margin: 50px 0 80px 0;
+    text-align: center;
+  }
+
+  .registration__login {
+    margin-top: 14px;
+    font-size: 12px;
+    line-height: 14.52px;
+  }
+
+  .registration__error-update {
+    margin-top: 0;
+  }
+
+  .registration__button {
+    font-size: 12px;
+    line-height: 14.52px;
+  }
+}

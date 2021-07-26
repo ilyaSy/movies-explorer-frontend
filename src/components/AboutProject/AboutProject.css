@@ -1,0 +1,149 @@
+.project {
+  margin: 0 auto;
+  padding: 0 70px 110px 70px;
+}
+
+.project__details {
+  margin: 70px 0 0 0;
+  padding: 0;
+  display: grid;
+  gap: 26px 40px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-areas:
+    'title1 title2'
+    'text1 text2';
+}
+
+.project__details-title {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24.2px;
+  letter-spacing: -0.04em;
+}
+
+.project__details-title_t1 {
+  grid-area: title1;
+}
+
+.project__details-title_t2 {
+  grid-area: title2;
+}
+
+.project__details-text {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.project__details-text_t1 {
+  grid-area: text1;
+}
+
+.project__details-text_t2 {
+  grid-area: text2;
+}
+
+.project__progress {
+  margin: 110px 0 0 0;
+  padding: 0;
+  display: grid;
+  pad: 0 0;
+  grid-template-columns: 20% 80%;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16.94px;
+  text-align: center;
+  color: #a0a0a0;
+}
+
+.project__progress-week-back {
+  margin: 0;
+  padding: 9px 0;
+  color: #fff;
+  background-color: #000;
+  font-weight: 400;
+}
+
+.project__progress-week-front {
+  margin: 0;
+  padding: 9px 0;
+  color: #000;
+  background-color: #f2f2f2;
+  font-weight: 400;
+}
+
+.project__progress-title-back,
+.project__progress-title-front {
+  margin: 0;
+  padding: 9px 0;
+}
+
+@media screen and (max-width: 848px) {
+  .project {
+    padding: 0 50px 90px 50px;
+  }
+
+  .project__details-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .project__progress {
+    margin-top: 93px;
+    grid-template-columns: 20.958% 1fr;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .project__progress {
+    grid-template-columns: 100px 1fr;
+  }
+}
+
+@media screen and (max-width: 581px) {
+  .project {
+    padding: 0 18px 70px 18px;
+  }
+
+  .project__details {
+    margin-top: 60px;
+    grid-template-areas:
+      'title1'
+      'text1'
+      'title2'
+      'text2';
+  }
+
+  .project__details-title {
+    font-size: 18px;
+    line-height: 21.78px;
+  }
+
+  .project__details-text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .project__progress {
+    margin-top: 60px;
+    font-size: 11px;
+    line-height: 13.31px;
+  }
+
+  .project__progress-week-back {
+    padding: 11px 0;
+  }
+  
+  .project__progress-week-front {
+    padding: 11px 0;
+  }
+
+  .project__progress-title-back,
+  .project__progress-title-front {
+    padding-top: 10px;
+  }
+}

@@ -1,0 +1,116 @@
+.navigation {
+  width: 100%;
+  margin: 0;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navigation_main {
+  width: unset;
+}
+
+.navigation__menu {
+  margin: 0;
+  padding: 0;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navigation__menu-link {
+  margin: 0;
+  padding: 0;
+  color: #000;
+  text-decoration: none;
+  transition: opacity .3s ease-out;
+}
+
+.navigation__menu-link_bold {
+  font-weight: 500;
+}
+
+.navigation__menu-link:not(:last-child) {
+  margin-right: 16px;
+}
+
+.navigation__account {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+  transition: opacity .3s ease-out;
+}
+
+.navigation__account-logo {
+  margin: 0 0 0 17px;
+  padding: 8px 7.25px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  width: 26px;
+  height: 30px;
+  box-sizing: border-box;
+}
+
+.navigation__registration {
+  text-decoration: none;
+  color: #000;
+  transition: opacity .3s ease-out;
+}
+
+.navigation__login {
+  margin: 0 0 0 30px;
+  padding: 8px 20px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #000;
+  border-radius: 3px;
+  transition: opacity .3s ease-out;
+}
+
+.navigation__login:hover {
+  opacity: .8;
+}
+
+.navigation__registration:hover,
+.navigation__account:hover,
+.navigation__menu-link:hover {
+  opacity: .7;
+}
+
+.navigation__burger-menu-button {
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  width: 44px;
+  height: 44px;
+  background-image: url('../../images/burger.svg');
+  background-position: center;
+  background-size: contain;
+  background-color: #fff;
+  border: 0;
+  display: none;
+  transition: opacity .3s ease-out;
+}
+
+.navigation__burger-menu-button:hover {
+  opacity: .8;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation {
+    justify-content: flex-end;
+  }
+
+  .navigation__menu,
+  .navigation__account,
+  .navigation__registration,
+  .navigation__login {
+    display: none;
+  }
+
+  .navigation__burger-menu-button {
+    display: inline-block;
+  }
+}
+

@@ -1,0 +1,51 @@
+.checkbox {
+  margin: 41px auto 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 18px;
+  width: max-content;
+  cursor: pointer;
+  transition: opactity .3s ease-out;
+}
+
+.checkbox:hover {
+  opacity: .8;
+}
+
+.checkbox__title {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.checkbox__pic {
+  margin: 0 12px 0 0;
+  padding: 0;
+  width: 36px;
+  height: 20px;
+  background-image: url('../../images/checkboxOff.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.checkbox__pic_checked {
+  background-image: url('../../images/checkboxOn.svg');
+}
+
+.checkbox__input {
+  display: none;
+}
+
+@media screen and (max-width: 456px) {
+  .checkbox {
+    font-size: 11px;
+  }
+
+  .checkbox__pic {
+    margin-right: 13px;
+  }
+}
