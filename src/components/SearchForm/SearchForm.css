@@ -29,6 +29,10 @@
   width: 100%;
 }
 
+.search-form__input:focus {
+  border-bottom: 1px solid #a0a0a0;
+}
+
 .search-form__input-button {
   margin: 0;
   /* padding: 8px 10.35px; */

@@ -14,9 +14,12 @@
   opacity: .8;
 }
 
-.checkbox-title {
+.checkbox__title {
   margin: 0;
   padding: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .checkbox__pic {
