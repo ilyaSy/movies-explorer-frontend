@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Profile.css';
 
-export default function Profile() {
+export default function Profile({ signOut }) {
   const currentUser = useContext(CurrentUserContext);
   const email = currentUser.email;
   const [name, setName] = useState(currentUser.name);
@@ -70,7 +70,7 @@ export default function Profile() {
           Редактировать
         </button>
       </form>
-      <button className='profile__button profile__button_type_logout'>
+      <button className='profile__button profile__button_type_logout' onClick={signOut}>
         Выйти из аккаунта
       </button>
     </main>

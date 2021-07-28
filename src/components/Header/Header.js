@@ -4,7 +4,7 @@ import { profileURL, moviesURL, savedMoviesURL, signinURL, signupURL } from '../
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
 
-export default function Header() {
+export default function Header({isLogged}) {
   
   const location = useLocation();
   const pathname = location.pathname;
@@ -19,7 +19,7 @@ export default function Header() {
 
       {
         !isSigninSignupURL && (
-          <Navigation />
+          <Navigation isLogged={isLogged}/>
         )
       }
     </header>

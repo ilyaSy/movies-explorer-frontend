@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { signupURL } from '../../utils/constants';
 import './Login.css';
 
-export default function Login() {
+export default function Login({ signIn }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [isErroneous, setIsErroneous] = useState(false);
@@ -13,7 +13,8 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsErroneous(true);
+    // setIsErroneous(true);
+    signIn(email, password);
   }
 
   return (

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { signinURL } from '../../utils/constants';
 import './Register.css';
 
-export default function Register() {
+export default function Register({ signUp }) {
   const [email, setEmail] = useState();
   const [name, setName] = useState();
   const [password, setPassword] = useState();
@@ -15,7 +15,8 @@ export default function Register() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsErroneous(true);
+    // setIsErroneous(true);
+    signUp(name, email, password);
   }
 
   return (

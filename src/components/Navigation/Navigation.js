@@ -5,7 +5,7 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import accountImage from '../../images/account.svg';
 import './Navigation.css';
 
-export default function Navigation() {
+export default function Navigation({ isLogged }) {
   const [isBurgerOpened, setIsBurgerOpened] = useState(false);
 
   const handleBurgerMenuOpen = () => setIsBurgerOpened(true);
@@ -13,12 +13,12 @@ export default function Navigation() {
 
   const location = useLocation();
   const pathname = location.pathname;
-  const main = pathname === '/' ? true : false;
+  const headerLogged = ![signinURL, signupURL].includes(pathname) && isLogged ? true : false;
 
   return (
-    <div className={`navigation ${main && 'navigation_main'}`}>
+    <div className={`navigation ${!headerLogged && 'navigation_main'}`}>
       {
-        pathname !== '/' ? 
+        headerLogged ?
           (<>
             <nav className='navigation__menu'>
               <NavLink 
