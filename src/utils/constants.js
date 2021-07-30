@@ -1,4 +1,5 @@
 export const apiURL = 'https://api.ilya.nomoredomains.club';
+export const imagesApiURL = 'https://api.nomoreparties.co';
 export const moviesApiURL = 'https://api.nomoreparties.co/beatfilm-movies';
 export const signinURL = '/signin';
 export const signupURL = '/signup';

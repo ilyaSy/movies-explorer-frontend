@@ -31,8 +31,8 @@ export default function App() {
       .then((res) => {
         if (res.login === 'success') {
           setIsLogged(true);
-          // setCurrentUser({ email: email });
-          history.push('/');
+          setCurrentUser({ email: email });
+          history.push(moviesURL);
 
           MainApi.getMe().then((res) => {
             console.log('get user data', res)
@@ -85,7 +85,10 @@ export default function App() {
         </Route>
 
         <Route path={profileURL}>
-          <Profile signOut={signOut} />
+          <Profile  
+            signOut={signOut}
+            setUserData={setCurrentUser}
+          />
         </Route>
 
         <Route path={moviesURL}>
@@ -97,14 +100,17 @@ export default function App() {
         </Route>
 
         {/* <ProtectedRoute 
+          isLogged={isLogged}
           component={Movies}
         />
 
         <ProtectedRoute 
+          isLogged={isLogged}
           component={SavedMovies}
         />
 
         <ProtectedRoute 
+          isLogged={isLogged}
           component={Profile}
         /> */}
 

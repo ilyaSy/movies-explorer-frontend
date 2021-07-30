@@ -1,10 +1,10 @@
 import { signinURL } from '../../utils/constants';
 import {Redirect, Route} from 'react-router-dom';
 
-export default function ProtectedRoute({component: Component, ...props}){
+export default function ProtectedRoute({component: Component, isLogged, ...props}){
   return (
   <Route>
-    {props.isLoggedIn ? <Component {...props} /> : <Redirect to={signinURL}/>}
+    {isLogged ? <Component {...props} /> : <Redirect to={signinURL}/>}
   </Route>
   )
 }

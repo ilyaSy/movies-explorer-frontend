@@ -1,27 +1,43 @@
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import { moviesURL, savedMoviesURL } from '../../utils/constants';
+import { moviesURL } from '../../utils/constants';
 import './MoviesCardList.css';
 
-export default function MoviesCardList ({movies}) {
+export default function MoviesCardList ({ movies, updateMoviesList }) {
+  const moviesCountStart = 12;
+  const moviesCountMore = 3;
+
+  const [moviesShown, setMoviesShown] = useState([]);
+  const [moviesCount, setMoviesCount] = useState(moviesCountStart);
   const location = useLocation();
   const pathname = location.pathname;
 
-  const moviesShown = pathname === savedMoviesURL ?
-    [...movies.filter((m) => m.saved)] : [...movies]
+  useEffect(() => {
+    setMoviesShown(movies.filter((m, i) => i < moviesCountStart));
+  }, [movies, setMoviesShown]);
+
+  const handleShowMore = () => {
+    setMoviesCount(moviesCount + moviesCountMore);
+    setMoviesShown(movies.filter((m, i) => i < moviesCount));
+  }
 
   return (
     <>
       <section className='movies-list'>
         {
           moviesShown.map((movie) => (
-            <MoviesCard key={movie.id} movie={movie} />
+            <MoviesCard 
+              key={movie.id}
+              movie={movie}
+              updateMoviesList={updateMoviesList}
+            />
           ))
         }
       </section>
       {
-        pathname === moviesURL && (
-          <button className='movies-list__button'>Ещё</button>
+        pathname === moviesURL && moviesCount < movies.length && (
+          <button className='movies-list__button' onClick={handleShowMore}>Ещё</button>
         )
       }
     </>

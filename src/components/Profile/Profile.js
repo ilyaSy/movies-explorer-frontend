@@ -1,10 +1,9 @@
-import { useContext, useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import { signoutURL } from '../../utils/constants';
+import { useContext, useEffect, useState } from 'react';
+import MainApi from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Profile.css';
 
-export default function Profile({ signOut }) {
+export default function Profile({ signOut, setUserData }) {
   const currentUser = useContext(CurrentUserContext);
   const email = currentUser.email;
   const [name, setName] = useState(currentUser.name);
@@ -13,7 +12,12 @@ export default function Profile({ signOut }) {
   
   const defaultName = currentUser.name;
 
-  // const handleSetEmail = (event) => setEmail(event.target.value);
+  useEffect(() => {
+    MainApi.getMe().then((res) => {
+      if (res.data) setUserData( res.data );
+    })
+  }, [setUserData]);
+
   const handleSetName = (event) => {
     event.target.value !== defaultName ? 
       setIsEditable(true) : setIsEditable(false);
