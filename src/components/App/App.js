@@ -84,7 +84,7 @@ export default function App() {
           <Login signIn={signIn} />
         </Route>
 
-        <Route path={profileURL}>
+        {/* <Route path={profileURL}>
           <Profile  
             signOut={signOut}
             setUserData={setCurrentUser}
@@ -97,22 +97,27 @@ export default function App() {
 
         <Route path={savedMoviesURL}>
           <SavedMovies />
-        </Route>
+        </Route> */}
 
-        {/* <ProtectedRoute 
-          isLogged={isLogged}
+        <ProtectedRoute 
+          // isLogged={isLogged}
           component={Movies}
+          path={moviesURL}
         />
 
         <ProtectedRoute 
-          isLogged={isLogged}
+          // isLogged={isLogged}
           component={SavedMovies}
+          path={savedMoviesURL}
         />
 
         <ProtectedRoute 
-          isLogged={isLogged}
+          // isLogged={isLogged}
           component={Profile}
-        /> */}
+          signOut={signOut}
+          setUserData={setCurrentUser}
+          path={profileURL}
+        />
 
         <Route path='*'>
           <PageNotFound />
