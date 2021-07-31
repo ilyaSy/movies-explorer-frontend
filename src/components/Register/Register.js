@@ -1,13 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import validator from 'validator';
 import { signinURL } from '../../utils/constants';
 import './Register.css';
 
 export default function Register({ signUp }) {
-  const [email, setEmail] = useState();
-  const [name, setName] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [isValidData, setIsValidData] = useState(false);
   const [isErroneous, setIsErroneous] = useState(false);
+
+  useEffect(() => {
+    if (
+      validator.isEmail(email) &&
+      /[a-zA-Zа-яёА-ЯЁ0-9 ]+/.test(name) &&
+      password.length >= 5
+    ) {
+      setIsValidData(true);
+    } else {
+      setIsValidData(false);
+    }
+  }, [name, email, password]);
 
   const handleSetEmail = (event) => setEmail(event.target.value);
   const handleSetName = (event) => setName(event.target.value);
@@ -17,12 +31,17 @@ export default function Register({ signUp }) {
     event.preventDefault();
     // setIsErroneous(true);
     signUp(name, email, password);
-  }
+  };
 
   return (
     <main className='registration'>
       <h1 className='registration__title'>Добро пожаловать!</h1>
-      <form action='/' name='signup' className='registration__form' onSubmit={handleSubmit}>
+      <form
+        action='/'
+        name='signup'
+        className='registration__form'
+        onSubmit={handleSubmit}
+      >
         <fieldset className='registration__fieldset'>
           <label className='registration__input-label'>
             Имя
@@ -32,12 +51,14 @@ export default function Register({ signUp }) {
               className='registration__input registration__input_value_name'
               minLength='2'
               maxLength='30'
-              pattern='[a-zA-Zа-яёА-ЯЁ0-9]+'
+              pattern='[a-zA-Zа-яёА-ЯЁ0-9 ]+'
               required
               value={name}
               onChange={handleSetName}
             />
-            <p className='registration__error name-error'>Некорректная длина имени или использованы спецсимволы</p>
+            <p className='registration__error name-error'>
+              Некорректная длина имени или использованы спецсимволы
+            </p>
           </label>
 
           <label className='registration__input-label'>
@@ -53,7 +74,9 @@ export default function Register({ signUp }) {
               value={email}
               onChange={handleSetEmail}
             />
-            <p className='registration__error email-error'>Некорректный формат E-mail</p>
+            <p className='registration__error email-error'>
+              Некорректный формат E-mail
+            </p>
           </label>
 
           <label className='registration__input-label'>
@@ -68,14 +91,29 @@ export default function Register({ signUp }) {
               value={password}
               onChange={handleSetPassword}
             />
-            <p className='registration__error password-error'>Некорректная длина пароля</p>
+            <p className='registration__error password-error'>
+              Некорректная длина пароля
+            </p>
           </label>
         </fieldset>
 
-        <p className={`registration__error-update ${isErroneous && 'registration__error-update_opened'}`}>
+        <p
+          className={`registration__error-update ${
+            isErroneous && 'registration__error-update_opened'
+          }`}
+        >
           При регистрации пользователя произошла ошибка
         </p>
-        <button className='registration__button' type='submit'>Зарегистрироваться</button>
+
+        <button
+          className={`registration__button ${
+            isValidData && 'registration__button_active'
+          }`}
+          type='submit'
+          disabled={!isValidData}
+        >
+          Зарегистрироваться
+        </button>
       </form>
       <p className='registration__login'>
         Уже зарегистрированы?

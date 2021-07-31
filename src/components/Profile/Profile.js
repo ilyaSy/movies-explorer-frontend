@@ -17,10 +17,15 @@ export default function Profile({ signOut, setUserData }) {
     });
   }, [setUserData]);
 
+  useEffect(() => {
+    if (/^[a-zA-Zа-яёА-ЯЁ0-9 ]+$/.test(name) && name.length >= 2 && name.length <= 30 && name !== baseName) {
+      setIsEditable(true);
+    } else {
+      setIsEditable(false);
+    }
+  }, [name, baseName]);
+
   const handleSetName = (event) => {
-    event.target.value !== baseName
-      ? setIsEditable(true)
-      : setIsEditable(false);
     setName(event.target.value);
   };
 
@@ -53,7 +58,7 @@ export default function Profile({ signOut, setUserData }) {
             className='profile__input profile__input_value_name'
             minLength='2'
             maxLength='30'
-            pattern='[a-zA-Zа-яёА-ЯЁ0-9 ]+'
+            pattern='^[a-zA-Zа-яёА-ЯЁ0-9 ]+$'
             required
             value={name}
             onChange={handleSetName}
@@ -87,6 +92,7 @@ export default function Profile({ signOut, setUserData }) {
           className={`profile__button profile__button_type_edit ${
             !isEditable && 'profile__button_disabled'
           }`}
+          disabled={!isEditable}
           type='submit'
         >
           Редактировать
