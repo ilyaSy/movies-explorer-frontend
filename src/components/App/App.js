@@ -26,7 +26,7 @@ export default function App() {
   const [isLogged, setIsLogged] = useState(false);
   const history = useHistory();
 
-  const signIn = (email, password) => {
+  const signIn = (email, password, setError) => {
     MainApi.signIn({ email, password })
       .then((res) => {
         if (res.login === 'success') {
@@ -40,10 +40,22 @@ export default function App() {
           })
         }
       })
-      .catch(console.log);
+      .catch((err) => {
+        if (err.status === 401) {
+          setError('Вы ввели неправильные почту или пароль');
+        } else if (err.status === 500) {
+          setError('На сервере произошла ошибка');
+        } else if (err.status === 404) {
+          setError('Страница по указаному маршруту не найдена');
+        } else {
+          setError('При авторизации произошла ошибка');
+        }
+
+        // console.log(err);
+      });
   };
 
-  const signUp = (name, email, password) => {
+  const signUp = (name, email, password, setError) => {
     MainApi.signUp({ name, email, password })
       .then((res) => {
         if (res.data) {
@@ -54,7 +66,19 @@ export default function App() {
           history.push(signinURL);
         }
       })
-      .catch(console.log);
+      .catch((err) => {
+        if (err.status === 409) {
+          setError('Пользователь с таким email уже существует');
+        } else if (err.status === 500) {
+          setError('На сервере произошла ошибка');
+        } else if (err.status === 404) {
+          setError('Страница по указаному маршруту не найдена');
+        } else {
+          setError('При регистрации произошла ошибка');
+        }
+
+        // console.log(err);
+      });
   };
 
   const signOut = () => {
@@ -84,35 +108,17 @@ export default function App() {
           <Login signIn={signIn} />
         </Route>
 
-        {/* <Route path={profileURL}>
-          <Profile  
-            signOut={signOut}
-            setUserData={setCurrentUser}
-          />
-        </Route>
-
-        <Route path={moviesURL}>
-          <Movies />
-        </Route>
-
-        <Route path={savedMoviesURL}>
-          <SavedMovies />
-        </Route> */}
-
-        <ProtectedRoute 
-          // isLogged={isLogged}
+        <ProtectedRoute
           component={Movies}
           path={moviesURL}
         />
 
-        <ProtectedRoute 
-          // isLogged={isLogged}
+        <ProtectedRoute
           component={SavedMovies}
           path={savedMoviesURL}
         />
 
-        <ProtectedRoute 
-          // isLogged={isLogged}
+        <ProtectedRoute
           component={Profile}
           signOut={signOut}
           setUserData={setCurrentUser}

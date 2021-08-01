@@ -9,7 +9,7 @@ export default function Profile({ signOut, setUserData }) {
   const [name, setName] = useState(currentUser.name);
   const [baseName, setBaseName] = useState(currentUser.name);
   const [isEditable, setIsEditable] = useState(false);
-  const [isErroneous, setIsErroneous] = useState(false);
+  const [errorText, setErrorText] = useState('');
   
   const email = currentUser.email;
   const isValidData = useValidation({ name: name });
@@ -36,8 +36,19 @@ export default function Profile({ signOut, setUserData }) {
         setName(userData.name);
         setBaseName(userData.name);
       })
-      .catch(console.log);
-    // setIsErroneous(true);
+      .catch((err) => {
+        if (err.status === 409) {
+          setErrorText('Пользователь с таким email уже существует');
+        } else if (err.status === 500) {
+          setErrorText('На сервере произошла ошибка');
+        } else if (err.status === 404) {
+          setErrorText('Страница по указаному маршруту не найдена');
+        } else {
+          setErrorText('При обновлении профиля произошла какая-то ошибка');
+        }
+
+        // console.log(err);
+      });
   };
 
   return (
@@ -84,10 +95,10 @@ export default function Profile({ signOut, setUserData }) {
 
         <p
           className={`profile__error-update ${
-            isErroneous && 'profile__error-update_opened'
+            errorText && 'profile__error-update_opened'
           }`}
         >
-          При обновлении профиля произошла какая-то ошибка
+          {errorText}
         </p>
         <button
           className={`profile__button profile__button_type_edit ${

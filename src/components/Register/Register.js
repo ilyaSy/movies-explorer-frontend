@@ -5,12 +5,12 @@ import useValidation from '../../utils/useValidation';
 import './Register.css';
 
 export default function Register({ signUp }) {
+  const [errorText, setErrorText] = useState('');
   const [fields, setFields] = useState({
     name: '',
     email: '',
     password: '',
   });
-  const [isErroneous, setIsErroneous] = useState(false);
 
   const isValidData = useValidation(fields);
 
@@ -18,8 +18,7 @@ export default function Register({ signUp }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setIsErroneous(true);
-    signUp(fields.name, fields.email, fields.password);
+    signUp(fields.name, fields.email, fields.password, setErrorText);
   };
 
   return (
@@ -37,6 +36,7 @@ export default function Register({ signUp }) {
             <input
               type='text'
               name='name'
+              id='name'
               className='registration__input registration__input_value_name'
               minLength='2'
               maxLength='30'
@@ -55,6 +55,7 @@ export default function Register({ signUp }) {
             <input
               type='text'
               name='email'
+              id='email'
               className='registration__input registration__input_value_name'
               minLength='7'
               maxLength='200'
@@ -73,6 +74,7 @@ export default function Register({ signUp }) {
             <input
               type='password'
               name='password'
+              id='password'
               className='registration__input registration__input_value_password'
               minLength='5'
               maxLength='200'
@@ -88,10 +90,10 @@ export default function Register({ signUp }) {
 
         <p
           className={`registration__error-update ${
-            isErroneous && 'registration__error-update_opened'
+            errorText && 'registration__error-update_opened'
           }`}
         >
-          При регистрации пользователя произошла ошибка
+          {errorText}
         </p>
 
         <button

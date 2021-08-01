@@ -31,6 +31,7 @@ export default function SearchForm({ onSubmit }) {
         name='shortFilm'
         text='Короткометражки'
         value={shortFilm}
+        onSubmit={handleSubmit}
         onChange={handleSetShortFilm}
       />
     </form>

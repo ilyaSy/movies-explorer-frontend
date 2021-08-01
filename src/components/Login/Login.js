@@ -5,11 +5,11 @@ import useValidation from '../../utils/useValidation';
 import './Login.css';
 
 export default function Login({ signIn }) {
+  const [errorText, setErrorText] = useState('');
   const [fields, setFields] = useState({
     email: '',
     password: '',
   });
-  const [isErroneous, setIsErroneous] = useState(false);
 
   const isValidData = useValidation(fields);
   
@@ -17,8 +17,7 @@ export default function Login({ signIn }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setIsErroneous(true);
-    signIn(fields.email, fields.password);
+    signIn(fields.email, fields.password, setErrorText);
   };
 
   return (
@@ -71,10 +70,10 @@ export default function Login({ signIn }) {
 
         <p
           className={`login__error-update ${
-            isErroneous && 'login__error-update_opened'
+            errorText && 'login__error-update_opened'
           }`}
         >
-          Вы ввели неправильный логин или пароль
+          {errorText}
         </p>
         <button
           className={`login__button ${isValidData && 'login__button_active'}`}

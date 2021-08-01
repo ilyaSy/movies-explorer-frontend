@@ -73,8 +73,6 @@ export default class MainApi {
   static _handleApiResult(fnName, res) {
     return ['OK', 'Created', 'No Content'].includes(res.statusText)
       ? res.json()
-      : Error(
-          `Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`
-        );
+      : Promise.reject(res);
   }
 }
