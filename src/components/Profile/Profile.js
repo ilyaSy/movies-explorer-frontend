@@ -1,15 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
 import MainApi from '../../utils/MainApi';
+import useValidation from '../../utils/useValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Profile.css';
 
 export default function Profile({ signOut, setUserData }) {
   const currentUser = useContext(CurrentUserContext);
-  const email = currentUser.email;
   const [name, setName] = useState(currentUser.name);
   const [baseName, setBaseName] = useState(currentUser.name);
   const [isEditable, setIsEditable] = useState(false);
   const [isErroneous, setIsErroneous] = useState(false);
+  
+  const email = currentUser.email;
+  const isValidData = useValidation({ name: name });
 
   useEffect(() => {
     MainApi.getMe().then((res) => {
@@ -18,11 +21,7 @@ export default function Profile({ signOut, setUserData }) {
   }, [setUserData]);
 
   useEffect(() => {
-    if (/^[a-zA-Zа-яёА-ЯЁ0-9 ]+$/.test(name) && name.length >= 2 && name.length <= 30 && name !== baseName) {
-      setIsEditable(true);
-    } else {
-      setIsEditable(false);
-    }
+    name !== baseName ? setIsEditable(true) : setIsEditable(false);
   }, [name, baseName]);
 
   const handleSetName = (event) => {
@@ -55,10 +54,11 @@ export default function Profile({ signOut, setUserData }) {
           <input
             type='text'
             name='name'
+            id='name'
             className='profile__input profile__input_value_name'
             minLength='2'
             maxLength='30'
-            pattern='^[a-zA-Zа-яёА-ЯЁ0-9 ]+$'
+            pattern='^[a-zA-Zа-яёА-ЯЁ -]+$'
             required
             value={name}
             onChange={handleSetName}
@@ -71,6 +71,7 @@ export default function Profile({ signOut, setUserData }) {
           <input
             type='text'
             name='email'
+            id='email'
             className='profile__input profile__input_value_email'
             minLength='7'
             maxLength='200'
@@ -90,9 +91,9 @@ export default function Profile({ signOut, setUserData }) {
         </p>
         <button
           className={`profile__button profile__button_type_edit ${
-            !isEditable && 'profile__button_disabled'
+            (!isEditable || !isValidData) && 'profile__button_disabled'
           }`}
-          disabled={!isEditable}
+          disabled={!isEditable || !isValidData}
           type='submit'
         >
           Редактировать

@@ -1,31 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { signupURL } from '../../utils/constants';
-import validator from 'validator';
+import useValidation from '../../utils/useValidation';
 import './Login.css';
 
 export default function Login({ signIn }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isValidData, setIsValidData] = useState(false);
+  const [fields, setFields] = useState({
+    email: '',
+    password: '',
+  });
   const [isErroneous, setIsErroneous] = useState(false);
 
-  useEffect(() => {
-    if (validator.isEmail(email) && password.length >= 5) {
-      setIsValidData(true);
-    } else {
-      setIsValidData(false);
-    }
-  }, [email, password]);
-
-  const handleSetEmail = (event) => setEmail(event.target.value);
-  const handleSetPassword = (event) => setPassword(event.target.value);
-  // const handleSetError = () => setIsErroneous();
+  const isValidData = useValidation(fields);
+  
+  const handleSetFieldValue = (event) => setFields({...fields, [event.target.name]: event.target.value});
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // setIsErroneous(true);
-    signIn(email, password);
+    signIn(fields.email, fields.password);
   };
 
   return (
@@ -43,14 +36,14 @@ export default function Login({ signIn }) {
             <input
               type='text'
               name='email'
-              // placeholder="Email"
+              id='email'
               className='login__input login__input_value_email'
               minLength='7'
               maxLength='200'
               pattern='.{2,}@.{2,}\.[a-zA-Z]{2,6}'
               required
-              value={email}
-              onChange={handleSetEmail}
+              value={fields.email}
+              onChange={handleSetFieldValue}
             />
             <p className='login__error email-error'>
               Некорректный формат E-mail
@@ -62,13 +55,13 @@ export default function Login({ signIn }) {
             <input
               type='password'
               name='password'
-              // placeholder="Пароль"
+              id='password'
               className='login__input login__input_value_password'
               minLength='5'
               maxLength='200'
               required
-              value={password}
-              onChange={handleSetPassword}
+              value={fields.password}
+              onChange={handleSetFieldValue}
             />
             <p className='login__error password-error'>
               Некорректная длина пароля

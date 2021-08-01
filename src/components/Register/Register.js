@@ -1,36 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import validator from 'validator';
 import { signinURL } from '../../utils/constants';
+import useValidation from '../../utils/useValidation';
 import './Register.css';
 
 export default function Register({ signUp }) {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [isValidData, setIsValidData] = useState(false);
+  const [fields, setFields] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
   const [isErroneous, setIsErroneous] = useState(false);
 
-  useEffect(() => {
-    if (
-      validator.isEmail(email) &&
-      /[a-zA-Zа-яёА-ЯЁ0-9 ]+/.test(name) &&
-      password.length >= 5
-    ) {
-      setIsValidData(true);
-    } else {
-      setIsValidData(false);
-    }
-  }, [name, email, password]);
+  const isValidData = useValidation(fields);
 
-  const handleSetEmail = (event) => setEmail(event.target.value);
-  const handleSetName = (event) => setName(event.target.value);
-  const handleSetPassword = (event) => setPassword(event.target.value);
+  const handleSetFieldValue = (event) => setFields({...fields, [event.target.name]: event.target.value});
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // setIsErroneous(true);
-    signUp(name, email, password);
+    signUp(fields.name, fields.email, fields.password);
   };
 
   return (
@@ -51,10 +40,10 @@ export default function Register({ signUp }) {
               className='registration__input registration__input_value_name'
               minLength='2'
               maxLength='30'
-              pattern='[a-zA-Zа-яёА-ЯЁ0-9 ]+'
+              pattern='^[a-zA-Zа-яёА-ЯЁ -]+$'
               required
-              value={name}
-              onChange={handleSetName}
+              value={fields.name}
+              onChange={handleSetFieldValue}
             />
             <p className='registration__error name-error'>
               Некорректная длина имени или использованы спецсимволы
@@ -71,8 +60,8 @@ export default function Register({ signUp }) {
               maxLength='200'
               pattern='.{2,}@.{2,}\.[a-zA-Z]{2,6}'
               required
-              value={email}
-              onChange={handleSetEmail}
+              value={fields.email}
+              onChange={handleSetFieldValue}
             />
             <p className='registration__error email-error'>
               Некорректный формат E-mail
@@ -88,8 +77,8 @@ export default function Register({ signUp }) {
               minLength='5'
               maxLength='200'
               required
-              value={password}
-              onChange={handleSetPassword}
+              value={fields.password}
+              onChange={handleSetFieldValue}
             />
             <p className='registration__error password-error'>
               Некорректная длина пароля
