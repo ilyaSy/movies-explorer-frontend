@@ -41,9 +41,9 @@ export default function MoviesCardList ({ movies, updateMoviesList }) {
       <>
         <section className='movies-list'>
           {
-            moviesShown.map((movie) => (
+            moviesShown.map((movie, index) => (
               <MoviesCard 
-                key={movie.movieId}
+                key={index}
                 movie={movie}
                 updateMoviesList={updateMoviesList}
               />
