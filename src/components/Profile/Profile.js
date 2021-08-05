@@ -5,29 +5,21 @@ import useValidation from '../../utils/useValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Profile.css';
 
-export default function Profile({ signOut, setUserData }) {
+export default function Profile({ signOut }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState(currentUser.name);
   const [baseName, setBaseName] = useState(currentUser.name);
   const [isEditable, setIsEditable] = useState(false);
   const [errorText, setErrorText] = useState('');
-  
+
   const email = currentUser.email;
   const isValidData = useValidation({ name: name });
 
   useEffect(() => {
-    MainApi.getMe().then((res) => {
-      if (res.data) setUserData(res.data);
-    });
-  }, [setUserData]);
-
-  useEffect(() => {
-    name !== baseName ? setIsEditable(true) : setIsEditable(false);
+    setIsEditable(name !== baseName);
   }, [name, baseName]);
 
-  const handleSetName = (event) => {
-    setName(event.target.value);
-  };
+  const handleSetName = (event) => setName(event.target.value);
 
   const handleSubmit = (event) => {
     event.preventDefault();

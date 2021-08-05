@@ -20,16 +20,30 @@ import {
   profileURL,
   moviesURL,
   savedMoviesURL,
-  imagesApiURL
+  imagesApiURL,
 } from '../../utils/constants';
 import './App.css';
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLogged, setIsLogged] = useState(false);
-  const [userMovies, setUserMovies] = useState([]);
-  const [movies, setMovies] = useState([]);
+  const [userMovies, setUserMovies] = useState(null);
+  const [movies, setMovies] = useState(null);
   const history = useHistory();
+
+  const loadUserData = () => {
+    MainApi.getMe()
+      .then((res) => {
+        if (res.data) {
+          setCurrentUser(res.data);
+          setIsLogged(true);
+          history.push(moviesURL);
+        }
+      })
+      .catch(() => {
+        history.push(signinURL);
+      });
+  };
 
   const signIn = (email, password, setError) => {
     MainApi.signIn({ email, password })
@@ -40,9 +54,9 @@ export default function App() {
           history.push(moviesURL);
 
           MainApi.getMe().then((res) => {
-            console.log('get user data', res)
+            console.log('get user data', res);
             if (res.data) setCurrentUser(res.data);
-          })
+          });
         }
       })
       .catch((err) => setError(errorHandler(err.status, 'login')));
@@ -65,7 +79,7 @@ export default function App() {
   const signOut = () => {
     MainApi.signOut()
       .then((res) => {
-        console.log(' signOut', res)
+        console.log(' signOut', res);
         if (res.signout === 'success') history.push('/');
       })
       .catch(console.log);
@@ -76,8 +90,8 @@ export default function App() {
     MainApi.getMovies()
       .then(setUserMovies)
       .catch(() => setIsErrData(true))
-      .finally(() => setIsLoading(false))
-  }
+      .finally(() => setIsLoading(false));
+  };
 
   const loadMovies = (setIsErrData, setIsLoading) => {
     setIsLoading(true);
@@ -86,8 +100,8 @@ export default function App() {
         setMovies(beatfilmMovies.map(createMovieCard));
       })
       .catch(() => setIsErrData(true))
-      .finally(() => setIsLoading(false))
-  }
+      .finally(() => setIsLoading(false));
+  };
 
   const createMovieCard = (movie) => {
     return {
@@ -111,20 +125,26 @@ export default function App() {
     if (movieUpdated._id) {
       delete movieUpdated._id;
       setUserMovies(userMovies.filter((m) => m.movieId !== movie.movieId));
-      setMovies(movies.map((m) => m.movieId === movie.movieId ? movieUpdated : m));
+      setMovies(
+        movies.map((m) => (m.movieId === movie.movieId ? movieUpdated : m))
+      );
     } else {
       setUserMovies([...userMovies, movie]);
-      setMovies(movies.map((m) => m.movieId === movie.movieId ? {...movieUpdated, _id: movie._id} : m));
+      setMovies(
+        movies.map((m) =>
+          m.movieId === movie.movieId ? { ...movieUpdated, _id: movie._id } : m
+        )
+      );
     }
-  }
+  };
 
   const updateUserMoviesList = (movie) => {
     setUserMovies(userMovies.filter((m) => m.movieId !== movie.movieId));
-  }
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Header isLogged={isLogged}/>
+      <Header isLogged={isLogged} />
       <Switch>
         <Route exact path='/'>
           <Main />
@@ -139,15 +159,18 @@ export default function App() {
         </Route>
 
         <ProtectedRoute
+          loadUserData={loadUserData}
           component={Movies}
           movies={movies}
           loadMovies={loadMovies}
+          userMovies={userMovies}
           loadUserMovies={loadUserMovies}
           onMovieAction={updateMoviesList}
           path={moviesURL}
         />
 
         <ProtectedRoute
+          loadUserData={loadUserData}
           component={SavedMovies}
           userMovies={userMovies}
           loadUserMovies={loadUserMovies}
@@ -156,6 +179,7 @@ export default function App() {
         />
 
         <ProtectedRoute
+          loadUserData={loadUserData}
           component={Profile}
           signOut={signOut}
           setUserData={setCurrentUser}

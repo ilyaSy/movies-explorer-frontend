@@ -4,7 +4,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import './Movies.css';
 
-export default function Movies({movies, onMovieAction, loadUserMovies, loadMovies}) {
+export default function Movies({movies, loadMovies, userMovies, loadUserMovies, onMovieAction}) {
   const [search, setSearch] = useState();
   const [shortFilm, setShortFilm] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -27,14 +27,14 @@ export default function Movies({movies, onMovieAction, loadUserMovies, loadMovie
   // --------------------------------------------------------
 
   useEffect(() => {
-    loadUserMovies(setIsErrData, setIsLoading);
+    if (!userMovies) loadUserMovies(setIsErrData, setIsLoading);
   }, []);
 
   const handleSearch = (searchValue, shortFilmValue) => {    
     setSearch(searchValue);
     setShortFilm(shortFilmValue);
 
-    if (!movies.length) loadMovies(setIsErrData, setIsLoading);
+    if (!movies || !movies.length) loadMovies(setIsErrData, setIsLoading);
   };
 
   return (
@@ -42,14 +42,15 @@ export default function Movies({movies, onMovieAction, loadUserMovies, loadMovie
       <SearchForm
         onSubmit={handleSearch}
         onCheckboxClick={setShortFilm}
-        isMoviesLoaded={!!movies.length}
+        isMoviesLoaded={!!movies && !!movies.length}
       />
       {!isLoading && !isErrData && (
         <MoviesCardList
           movies={
-            movies
-              .filter((m) => RegExp(search, 'i').test(m.nameRU) || RegExp(search, 'i').test(m.nameEN))
-              .filter((m) => (shortFilm ? m.duration <= 40 : true))
+            !movies ? [] : 
+              movies
+                .filter((m) => RegExp(search, 'i').test(m.nameRU) || RegExp(search, 'i').test(m.nameEN))
+                .filter((m) => (shortFilm ? m.duration <= 40 : true))
           }
           updateMoviesList={onMovieAction}
         />
