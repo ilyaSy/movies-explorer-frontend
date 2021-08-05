@@ -32,17 +32,15 @@ export default function App() {
   const history = useHistory();
 
   const loadUserData = () => {
-    MainApi.getMe()
+    return MainApi.getMe()
       .then((res) => {
         if (res.data) {
           setCurrentUser(res.data);
           setIsLogged(true);
-          history.push(moviesURL);
+          return true;
         }
+        return false;
       })
-      .catch(() => {
-        history.push(signinURL);
-      });
   };
 
   const signIn = (email, password, setError) => {
@@ -65,13 +63,7 @@ export default function App() {
   const signUp = (name, email, password, setError) => {
     MainApi.signUp({ name, email, password })
       .then((res) => {
-        if (res.data) {
-          // setCurrentUser({
-          //   name: 'Илья',
-          //   email: email,
-          // });
-          history.push(signinURL);
-        }
+        if (res.data) signIn(email, password, setError);
       })
       .catch((err) => setError(errorHandler(err.status, 'registration')));
   };
@@ -79,8 +71,10 @@ export default function App() {
   const signOut = () => {
     MainApi.signOut()
       .then((res) => {
-        console.log(' signOut', res);
-        if (res.signout === 'success') history.push('/');
+        if (res.signout === 'success') {
+          setIsLogged(false);
+          history.push('/');
+        }
       })
       .catch(console.log);
   };

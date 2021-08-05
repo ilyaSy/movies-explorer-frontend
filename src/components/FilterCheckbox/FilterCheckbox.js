@@ -1,10 +1,6 @@
 import './FilterCheckbox.css';
 
 export default function Checkbox({name, value, text, onChange}) {
-  // const handleChange = (event) => {
-  //   onChange(event);
-  // }
-
   return (
     <label className='checkbox'>
       <input

@@ -29,7 +29,7 @@ export default function MoviesCardList ({ movies, updateMoviesList }) {
           {
             moviesShown.map((movie) => (
               <MoviesCard 
-                key={movie.id}
+                key={movie._id}
                 movie={movie}
                 updateMoviesList={updateMoviesList}
               />
