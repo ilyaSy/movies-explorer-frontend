@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const useResize = (width) => {
+  const resetMovieCountMore = (width) => (width >= 1100 ? 3 : 2);
   const resetMovieCountStart = (width) => {
     let moviesCountStartUpd = 0;
     if (width >= 1100) {
@@ -11,18 +12,6 @@ const useResize = (width) => {
       moviesCountStartUpd = 8;
     }
     return moviesCountStartUpd;
-  };
-
-  const resetMovieCountMore = (width) => {
-    let moviesCountMoreUpd = 0;
-    if (width >= 1100) {
-      moviesCountMoreUpd = 3;
-    } else if (width <= 690) {
-      moviesCountMoreUpd = 2;
-    } else {
-      moviesCountMoreUpd = 2;
-    }
-    return moviesCountMoreUpd;
   };
 
   const [moviesCountStart, setMoviesCountStart] = useState(

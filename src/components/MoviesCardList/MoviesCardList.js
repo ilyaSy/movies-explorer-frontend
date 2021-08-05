@@ -12,7 +12,6 @@ export default function MoviesCardList ({ movies, updateMoviesList }) {
   const pathname = location.pathname;
 
   const [moviesCountStart, moviesCountMore] = useResize(width);
-  const [moviesCount, setMoviesCount] = useState(moviesCountStart);
 
   // --------------------------------------------------------
   const resetResize = () => setWidth(window.innerWidth);
@@ -27,13 +26,13 @@ export default function MoviesCardList ({ movies, updateMoviesList }) {
   // --------------------------------------------------------
 
   useEffect(() => {
-    setMoviesShown(movies.filter((m, i) => i < moviesCountStart));
-  }, [movies, setMoviesShown]);
+    pathname === moviesURL ?
+      setMoviesShown(movies.filter((m, i) => i < (moviesShown.length || moviesCountStart))) :
+      setMoviesShown(movies)
+  }, [movies, moviesCountStart]);
 
   const handleShowMore = () => {
-    console.log(moviesCountMore);
-    setMoviesShown(movies.filter((m, i) => i < moviesCount + moviesCountMore));
-    setMoviesCount(moviesCount + moviesCountMore);    
+    setMoviesShown(movies.filter((m, i) => i < moviesShown.length + moviesCountMore));
   }
 
   return (
@@ -41,18 +40,27 @@ export default function MoviesCardList ({ movies, updateMoviesList }) {
       <>
         <section className='movies-list'>
           {
-            moviesShown.map((movie, index) => (
-              <MoviesCard 
-                key={index}
-                movie={movie}
-                updateMoviesList={updateMoviesList}
-              />
-            ))
-            
+            // pathname === moviesURL ? (
+              moviesShown.map((movie, index) => (
+                <MoviesCard 
+                  key={index}
+                  movie={movie}
+                  updateMoviesList={updateMoviesList}
+                />
+              ))
+            // ) : (
+            //   movies.map((movie, index) => (
+            //     <MoviesCard 
+            //       key={index}
+            //       movie={movie}
+            //       updateMoviesList={updateMoviesList}
+            //     />
+            //   ))
+            // )
           }
         </section>
         {
-          pathname === moviesURL && moviesCount < movies.length && (
+          pathname === moviesURL && moviesShown.length < movies.length && (
             <button className='movies-list__button' onClick={handleShowMore}>Ещё</button>
           )
         }

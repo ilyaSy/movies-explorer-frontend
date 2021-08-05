@@ -12,11 +12,19 @@ export default function SavedMovies ({userMovies, onMovieAction, loadUserMovies}
 
   useEffect(() => {
     if (!userMovies || !userMovies.length) loadUserMovies(setIsErrData, setIsLoading);
-  }, []);
+  }, [userMovies, loadUserMovies]);
 
   const handleSearch = (searchValue, shortFilmValue) => {
     setSearch(searchValue);
     setShortFilm(shortFilmValue);
+  };
+
+  const filterMovies = (moviesList, searchValue, shortFilmValue) => {
+    return !moviesList ? 
+      [] : 
+      moviesList
+        .filter((m) => RegExp(searchValue, 'i').test(m.nameRU) || RegExp(searchValue, 'i').test(m.nameEN))
+        .filter((m) => (shortFilmValue ? m.duration <= 40 : true))
   };
 
   return (
@@ -29,12 +37,7 @@ export default function SavedMovies ({userMovies, onMovieAction, loadUserMovies}
 
       {!isLoading && !isErrData && (
         <MoviesCardList 
-          movies={
-            !userMovies ? [] : 
-              userMovies
-                .filter((m) => RegExp(search, 'i').test(m.nameRU) || RegExp(search, 'i').test(m.nameEN))
-                .filter((m) => (shortFilm ? m.duration <= 40 : true))
-          }
+          movies={filterMovies(userMovies, search, shortFilm)}
           updateMoviesList={onMovieAction}          
         />
       )}

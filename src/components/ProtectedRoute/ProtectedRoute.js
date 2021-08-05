@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { Redirect, Route, useHistory } from 'react-router-dom';
-import { signinURL } from '../../utils/constants';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 export default function ProtectedRoute({
@@ -24,12 +23,6 @@ export default function ProtectedRoute({
         if (e.status !== 401) console.log(e)
       });
   }, []);
-
-  // const currentUser = useContext(CurrentUserContext);
-  // const isLogged = !!currentUser?.email;
-  // if (!isLogged) loadUserData();
-
-  console.log('isLogged ' + isLogged);
 
   return (
     <Route path={path}>

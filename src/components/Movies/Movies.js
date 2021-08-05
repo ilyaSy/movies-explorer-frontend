@@ -12,13 +12,21 @@ export default function Movies({movies, loadMovies, userMovies, loadUserMovies, 
 
   useEffect(() => {
     if (!userMovies) loadUserMovies(setIsErrData, setIsLoading);
-  }, []);
+  }, [userMovies, loadUserMovies]);
 
   const handleSearch = (searchValue, shortFilmValue) => {    
     setSearch(searchValue);
     setShortFilm(shortFilmValue);
 
     if (!movies || !movies.length) loadMovies(setIsErrData, setIsLoading);
+  };
+
+  const filterMovies = (moviesList, searchValue, shortFilmValue) => {
+    return !moviesList ? 
+      [] : 
+      moviesList
+        .filter((m) => RegExp(searchValue, 'i').test(m.nameRU) || RegExp(searchValue, 'i').test(m.nameEN))
+        .filter((m) => (shortFilmValue ? m.duration <= 40 : true))
   };
 
   return (
@@ -30,12 +38,7 @@ export default function Movies({movies, loadMovies, userMovies, loadUserMovies, 
       />
       {!isLoading && !isErrData && (
         <MoviesCardList
-          movies={
-            !movies ? [] : 
-              movies
-                .filter((m) => RegExp(search, 'i').test(m.nameRU) || RegExp(search, 'i').test(m.nameEN))
-                .filter((m) => (shortFilm ? m.duration <= 40 : true))
-          }
+          movies={filterMovies(movies, search, shortFilm)}
           updateMoviesList={onMovieAction}
         />
       )}

@@ -73,6 +73,8 @@ export default function App() {
       .then((res) => {
         if (res.signout === 'success') {
           setIsLogged(false);
+          setUserMovies(null);
+          setMovies(null);
           history.push('/');
         }
       })
@@ -82,7 +84,9 @@ export default function App() {
   const loadUserMovies = (setIsErrData, setIsLoading) => {
     setIsLoading(true);
     MainApi.getMovies()
-      .then(setUserMovies)
+      .then((loadedMovies) => {
+        setUserMovies(loadedMovies.filter((m) => m.owner.email === currentUser.email));
+      })
       .catch(() => setIsErrData(true))
       .finally(() => setIsLoading(false));
   };
@@ -133,7 +137,11 @@ export default function App() {
   };
 
   const updateUserMoviesList = (movie) => {
+    delete movie._id;
     setUserMovies(userMovies.filter((m) => m.movieId !== movie.movieId));
+    setMovies(
+      movies.map((m) => (m.movieId === movie.movieId ? movie : m))
+    );
   };
 
   return (
