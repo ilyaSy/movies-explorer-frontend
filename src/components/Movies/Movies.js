@@ -10,22 +10,6 @@ export default function Movies({movies, loadMovies, userMovies, loadUserMovies, 
   const [isLoading, setIsLoading] = useState(false);
   const [isErrData, setIsErrData] = useState(false);
 
-  // --------------------------------------------------------
-  let resizeTimer = false;
-
-  const resetResize = () => {
-    // window.innerWidth
-  }
-
-  const handleResizeTimer = () => {
-    if (resizeTimer) clearTimeout(resizeTimer);
-    
-    resizeTimer = setTimeout(resetResize, 1500);
-  }  
-
-  window.addEventListener('resize', handleResizeTimer);
-  // --------------------------------------------------------
-
   useEffect(() => {
     if (!userMovies) loadUserMovies(setIsErrData, setIsLoading);
   }, []);
