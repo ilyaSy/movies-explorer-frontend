@@ -7,7 +7,7 @@ export default class MainApi {
   static signIn(userData) {
     return fetch(`${apiURL}/signin`, {
       method: 'POST',
-      headers: headers,      
+      headers: headers,
       credentials: 'include',
       body: JSON.stringify(userData),
     }).then(MainApi._handleApiResult.bind(null, 'signIn'));

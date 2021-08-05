@@ -27,6 +27,15 @@
   opacity: .8;
 }
 
+.movies-list_nodata-text {
+  padding: 0;
+  margin: auto;
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+
 @media screen and (max-width: 768px) {
   .movies-list {
     gap: 47px 30px;

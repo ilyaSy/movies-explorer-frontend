@@ -1,10 +1,9 @@
 import './FilterCheckbox.css';
 
-export default function Checkbox({name, value, text, onChange, onSubmit}) {
-  const handleChange = (event) => {
-    onChange(event);
-    onSubmit(event);
-  }
+export default function Checkbox({name, value, text, onChange}) {
+  // const handleChange = (event) => {
+  //   onChange(event);
+  // }
 
   return (
     <label className='checkbox'>
@@ -13,11 +12,11 @@ export default function Checkbox({name, value, text, onChange, onSubmit}) {
           name={name}
           className='checkbox__input'
           checked={value}
-          onChange={handleChange}
+          onChange={onChange}
         />
       <span
         className={`checkbox__pic ${value && 'checkbox__pic_checked'}`}
-        onChange={handleChange}
+        onChange={onChange}
       >
       </span>
       <h3 className='checkbox__title'>{text}</h3>

@@ -1,84 +1,58 @@
 import { useEffect, useState } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import { imagesApiURL } from '../../utils/constants';
 import Preloader from '../Preloader/Preloader';
-import MoviesApi from '../../utils/MoviesApi';
-import MainApi from '../../utils/MainApi';
 import './Movies.css';
 
-export default function Movies() {
-  const [movies, setMovies] = useState([]);
-  const [userMovies, setUserMovies] = useState([]);
+export default function Movies({movies, onMovieAction, loadUserMovies, loadMovies}) {
+  const [search, setSearch] = useState();
+  const [shortFilm, setShortFilm] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [isNoData, setIsNoData] = useState(false);
   const [isErrData, setIsErrData] = useState(false);
 
+  // --------------------------------------------------------
+  let resizeTimer = false;
+
+  const resetResize = () => {
+    // window.innerWidth
+  }
+
+  const handleResizeTimer = () => {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    
+    resizeTimer = setTimeout(resetResize, 1500);
+  }  
+
+  window.addEventListener('resize', handleResizeTimer);
+  // --------------------------------------------------------
+
   useEffect(() => {
-    MainApi.getMovies()
-      .then((res) => {
-        if (res && Array.isArray(res)) setUserMovies(res);
-      })
-      .catch(console.log);
+    loadUserMovies(setIsErrData, setIsLoading);
   }, []);
 
-  const handleSearch = (search, shortFilm) => {
-    setIsLoading(true);
-    MoviesApi.getMovies()
-      .then((movies) => {
-        const filteredMovies = filterMovies(movies, search, shortFilm);
+  const handleSearch = (searchValue, shortFilmValue) => {    
+    setSearch(searchValue);
+    setShortFilm(shortFilmValue);
 
-        if (!filteredMovies.length) {
-          setIsNoData(true);
-          setIsLoading(false);
-        } else {
-          setMovies(filteredMovies.map((m) => createMovieCard(m)));
-          setIsLoading(false);
-        }
-      })
-      .catch(() => {
-        setIsLoading(false);
-        setIsErrData(true);
-      });
+    if (!movies.length) loadMovies(setIsErrData, setIsLoading);
   };
-
-  const filterMovies = (movies, filterValue, shortFilm) => {
-    const regexp = new RegExp(filterValue, 'i');
-    return movies
-      .filter((m) => regexp.test(m.nameRU) || regexp.test(m.nameEN))
-      .filter((m) => (shortFilm ? m.duration <= 40 : true));
-  };
-
-  const createMovieCard = (movie) => {
-    return {
-      country: movie.country || 'unknown',
-      director: movie.director || 'unknown',
-      duration: movie.duration || 404,
-      year: movie.year || 1970,
-      description: movie.description || 'unknown',
-      image: imagesApiURL + movie.image.url || 'unknown',
-      trailer: movie.trailerLink || 'unknown',
-      thumbnail: imagesApiURL + movie.image.formats.thumbnail.url || 'unknown',
-      movieId: movie.id || 404,
-      nameRU: movie.nameRU || movie.nameEN,
-      nameEN: movie.nameEN || movie.nameRU,
-      saved: userMovies.map((m) => m.movieId).includes(movie.id),
-    };
-  };
-
-  const updateMoviesList = (movie) => {
-    setUserMovies([...userMovies, movie]);
-    setMovies(movies.map((m) => m.movieId === movie.movieId ? {...movie,saved: true} : m));
-  }
 
   return (
     <main className='movies'>
-      <SearchForm onSubmit={handleSearch} />
-      {!isLoading && !isNoData && !isErrData && (
-        <MoviesCardList movies={movies} updateMoviesList={updateMoviesList} />
-      )}
-      {!isLoading && isNoData && (
-        <p className='movies__description-text'>Ничего не найдено</p>
+      <SearchForm
+        onSubmit={handleSearch}
+        onCheckboxClick={setShortFilm}
+        isMoviesLoaded={!!movies.length}
+      />
+      {!isLoading && !isErrData && (
+        <MoviesCardList
+          movies={
+            movies
+              .filter((m) => RegExp(search, 'i').test(m.nameRU) || RegExp(search, 'i').test(m.nameEN))
+              .filter((m) => (shortFilm ? m.duration <= 40 : true))
+          }
+          updateMoviesList={onMovieAction}
+        />
       )}
       {!isLoading && isErrData && (
         <p className='movie__description-text'>

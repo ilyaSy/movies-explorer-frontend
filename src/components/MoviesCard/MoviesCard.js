@@ -7,7 +7,7 @@ import MainApi from '../../utils/MainApi';
 import './MoviesCard.css';
 
 export default function MoviesCard({ movie, updateMoviesList }) {
-  const { id, image, nameRU, duration, saved } = movie;
+  const { id, image, nameRU, duration, trailer, _id } = movie;
 
   const location = useLocation();
   const pathname = location.pathname;
@@ -18,7 +18,7 @@ export default function MoviesCard({ movie, updateMoviesList }) {
   };
 
   const handleSaveMovie = () => {
-    delete movie.saved;
+    delete movie._id;
     MainApi.saveMovie(movie)
       .then((resMovie) => {
         updateMoviesList(resMovie);
@@ -50,8 +50,17 @@ export default function MoviesCard({ movie, updateMoviesList }) {
             className='movie__delete-pic'
           />
         </button>
-      ) : saved ? (
-        <img src={movieSavedPic} alt='Сохранено' className='movie_saved' />
+      ) : _id ? (
+        <button
+          type='button'
+          className='movie__button movie__button_type_delete'
+          onClick={handleRemoveMovie}
+        >
+          <img
+            src={movieSavedPic} 
+            alt='Сохранено'
+            className='movie_saved' />
+        </button>
       ) : (
         <button
           type='button'
@@ -61,11 +70,13 @@ export default function MoviesCard({ movie, updateMoviesList }) {
           Сохранить
         </button>
       )}
-      <img
-        src={image}
-        alt={`Изображение ${id} не может быть показано`}
-        className='movie__picture'
-      />
+      <a href={trailer} target='_blank' rel='noreferrer' className='movie__trailer-link'>
+        <img
+          src={image}
+          alt={`Изображение ${id} не может быть показано`}
+          className='movie__picture'
+        />
+      </a>
       <figcaption className='movie__caption'>
         <h2 className='movie__description'>{nameRU}</h2>
         <p className='movie__duration'>{durationStr}</p>

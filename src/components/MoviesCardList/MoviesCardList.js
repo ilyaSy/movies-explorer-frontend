@@ -23,23 +23,28 @@ export default function MoviesCardList ({ movies, updateMoviesList }) {
   }
 
   return (
-    <>
-      <section className='movies-list'>
+    movies.length ? (
+      <>
+        <section className='movies-list'>
+          {
+            moviesShown.map((movie) => (
+              <MoviesCard 
+                key={movie.id}
+                movie={movie}
+                updateMoviesList={updateMoviesList}
+              />
+            ))
+            
+          }
+        </section>
         {
-          moviesShown.map((movie) => (
-            <MoviesCard 
-              key={movie.id}
-              movie={movie}
-              updateMoviesList={updateMoviesList}
-            />
-          ))
+          pathname === moviesURL && moviesCount < movies.length && (
+            <button className='movies-list__button' onClick={handleShowMore}>Ещё</button>
+          )
         }
-      </section>
-      {
-        pathname === moviesURL && moviesCount < movies.length && (
-          <button className='movies-list__button' onClick={handleShowMore}>Ещё</button>
-        )
-      }
-    </>
+      </>
+    ) : (
+      <p className='movies-list_nodata-text'>Ничего не найдено</p>
+    )
   );
 }

@@ -2,11 +2,15 @@ import { useState } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
-export default function SearchForm({ onSubmit }) {
-  const [shortFilm, setShortFilm] = useState(true);
+export default function SearchForm({ onSubmit, onCheckboxClick, isMoviesLoaded }) {
+  const [shortFilm, setShortFilm] = useState(false);
   const [search, setSearch] = useState('');
 
-  const handleSetShortFilm = () => setShortFilm(!shortFilm);
+  const handleSetShortFilm = () => {
+    setShortFilm(!shortFilm);
+    
+    if (isMoviesLoaded) onCheckboxClick(!shortFilm);
+  };
   const handleSetSearch = (event) => setSearch(event.target.value);
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,7 +35,6 @@ export default function SearchForm({ onSubmit }) {
         name='shortFilm'
         text='Короткометражки'
         value={shortFilm}
-        onSubmit={handleSubmit}
         onChange={handleSetShortFilm}
       />
     </form>

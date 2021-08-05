@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import MainApi from '../../utils/MainApi';
+import errorHandler from '../../utils/errorHandler';
 import useValidation from '../../utils/useValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Profile.css';
@@ -36,19 +37,7 @@ export default function Profile({ signOut, setUserData }) {
         setName(userData.name);
         setBaseName(userData.name);
       })
-      .catch((err) => {
-        if (err.status === 409) {
-          setErrorText('Пользователь с таким email уже существует');
-        } else if (err.status === 500) {
-          setErrorText('На сервере произошла ошибка');
-        } else if (err.status === 404) {
-          setErrorText('Страница по указаному маршруту не найдена');
-        } else {
-          setErrorText('При обновлении профиля произошла какая-то ошибка');
-        }
-
-        // console.log(err);
-      });
+      .catch((err) => setErrorText(errorHandler(err.status, 'profile')));
   };
 
   return (
