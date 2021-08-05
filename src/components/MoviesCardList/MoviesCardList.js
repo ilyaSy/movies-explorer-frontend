@@ -26,10 +26,13 @@ export default function MoviesCardList ({ movies, updateMoviesList }) {
   // --------------------------------------------------------
 
   useEffect(() => {
+    const moviesCount = !moviesShown.length || moviesShown.length < moviesCountStart ? 
+                          moviesCountStart : 
+                          moviesShown.length;
     pathname === moviesURL ?
-      setMoviesShown(movies.filter((m, i) => i < (moviesShown.length || moviesCountStart))) :
+      setMoviesShown(movies.filter((m, i) => i < moviesCount)) :
       setMoviesShown(movies)
-  }, [movies, moviesCountStart]);
+  }, [movies, moviesCountStart, pathname, moviesShown.length]);
 
   const handleShowMore = () => {
     setMoviesShown(movies.filter((m, i) => i < moviesShown.length + moviesCountMore));

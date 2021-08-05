@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -30,18 +30,21 @@ export default function App() {
   const [userMovies, setUserMovies] = useState(null);
   const [movies, setMovies] = useState(null);
   const history = useHistory();
-
-  const loadUserData = () => {
-    return MainApi.getMe()
+  const pathname = history.location.pathname;
+  
+  useEffect(() => {
+    MainApi.getMe()
       .then((res) => {
         if (res.data) {
           setCurrentUser(res.data);
           setIsLogged(true);
-          return true;
+          history.push(pathname);
         }
-        return false;
       })
-  };
+      .catch((e) => {
+        if (e.status !== 401) console.log(e)
+      });
+  }, [history]);
 
   const signIn = (email, password, setError) => {
     MainApi.signIn({ email, password })
@@ -52,7 +55,6 @@ export default function App() {
           history.push(moviesURL);
 
           MainApi.getMe().then((res) => {
-            console.log('get user data', res);
             if (res.data) setCurrentUser(res.data);
           });
         }
@@ -161,7 +163,7 @@ export default function App() {
         </Route>
 
         <ProtectedRoute
-          loadUserData={loadUserData}
+          isLogged={isLogged}
           component={Movies}
           movies={movies}
           loadMovies={loadMovies}
@@ -172,7 +174,7 @@ export default function App() {
         />
 
         <ProtectedRoute
-          loadUserData={loadUserData}
+          isLogged={isLogged}
           component={SavedMovies}
           userMovies={userMovies}
           loadUserMovies={loadUserMovies}
@@ -181,7 +183,7 @@ export default function App() {
         />
 
         <ProtectedRoute
-          loadUserData={loadUserData}
+          isLogged={isLogged}
           component={Profile}
           signOut={signOut}
           setUserData={setCurrentUser}

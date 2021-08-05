@@ -19,6 +19,7 @@ export default function MoviesCard({ movie, updateMoviesList }) {
 
   const handleSaveMovie = () => {
     delete movie._id;
+    delete movie.owner;
     MainApi.saveMovie(movie)
       .then((resMovie) => {
         updateMoviesList(resMovie);
