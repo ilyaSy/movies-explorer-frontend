@@ -93,11 +93,9 @@ export default function Login({ signIn }) {
         </Link>
       </p>
 
-      {isLoading && (
-        <InfoTooltip isOpened={true}>
-          <Preloader />
-        </InfoTooltip>
-      )}
+      <InfoTooltip isOpened={isLoading}>
+        <Preloader />
+      </InfoTooltip>
     </main>
   );
 }

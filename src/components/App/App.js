@@ -33,43 +33,27 @@ export default function App() {
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const [infoText, setInfoText] = useState('');
   const history = useHistory();
-  // const [pathname, setPathname] = useState('/');
+  const [pathname, setPathname] = useState(history.location.pathname);
 
-  console.log(document.location.pathname);
-  console.log(history);
+  useEffect(() => {
+    if (history.location.pathname !== '/') {
+      setPathname(history.location.pathname);
+    }
+  }, [history]);
 
-  // useEffect(() => {
-  //   MainApi.getMe()
-  //     .then((res) => {
-  //       if (res.data) {
-  //         setCurrentUser(res.data);
-  //         setIsLogged(true);
-  //         // history.goBack();
-  //         // history.push(history.location.pathname)
-  //         history.push(pathname)
-  //       }
-  //     })
-  //     .catch((e) => {
-  //       if (e.status !== 401) console.log(e)
-  //     });
-  // }, [history, pathname]);
-
-  const loadMe = (pathname) => {
-    console.log(pathname);
+  useEffect(() => {
     MainApi.getMe()
       .then((res) => {
         if (res.data) {
           setCurrentUser(res.data);
           setIsLogged(true);
-          // history.goBack();
-          // history.push(history.location.pathname)
           history.push(pathname)
         }
       })
       .catch((e) => {
         if (e.status !== 401) console.log(e)
       });
-  };
+  }, [history, pathname]);
 
   const signIn = (email, password, setError, setIsLoading) => {
     setIsLoading(true);
@@ -196,7 +180,7 @@ export default function App() {
 
         <ProtectedRoute
           isLogged={isLogged}
-          loadMe={loadMe}
+          // loadMe={loadMe}
           component={Movies}
           movies={movies}
           loadMovies={loadMovies}
@@ -210,7 +194,7 @@ export default function App() {
 
         <ProtectedRoute
           isLogged={isLogged}
-          loadMe={loadMe}
+          // loadMe={loadMe}
           component={SavedMovies}
           userMovies={userMovies}
           loadUserMovies={loadUserMovies}
@@ -222,7 +206,7 @@ export default function App() {
 
         <ProtectedRoute
           isLogged={isLogged}
-          loadMe={loadMe}
+          // loadMe={loadMe}
           component={Profile}
           signOut={signOut}
           setUserData={setCurrentUser}

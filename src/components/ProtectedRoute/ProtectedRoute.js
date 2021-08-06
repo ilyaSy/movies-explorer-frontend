@@ -1,16 +1,12 @@
 import { useEffect } from 'react';
 import { Redirect, Route, useHistory } from 'react-router-dom';
 
-export default function ProtectedRoute({ component: Component, isLogged, loadMe, path, ...props }) {
+export default function ProtectedRoute({ component: Component, isLogged, path, ...props }) {
   const history = useHistory();
   console.log(document.location.pathname);
   useEffect(() => {
-    if (!isLogged) {
-      const pathname = document.location.pathname;
-      loadMe(pathname);
-      history.push('/');
-    }
-  }, [history, isLogged, loadMe]);
+    if (!isLogged) history.push('/');
+  }, [history, isLogged]);
 
   return (
     <Route exact path={path}>

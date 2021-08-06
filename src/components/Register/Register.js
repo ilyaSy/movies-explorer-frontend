@@ -116,11 +116,9 @@ export default function Register({ signUp }) {
         </Link>
       </p>
 
-      {isLoading && (
-        <InfoTooltip isOpened={true}>
-          <Preloader />
-        </InfoTooltip>
-      )}
+      <InfoTooltip isOpened={isLoading}>
+        <Preloader />
+      </InfoTooltip>
     </main>
   );
 }

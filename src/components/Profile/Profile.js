@@ -104,11 +104,9 @@ export default function Profile({ signOut, onTooltipOpen, setInfoText }) {
         Выйти из аккаунта
       </button>
 
-      {isLoading && (
-        <InfoTooltip isOpened={true}>
-          <Preloader />
-        </InfoTooltip>
-      )}
+      <InfoTooltip isOpened={isLoading}>
+        <Preloader />
+      </InfoTooltip>
     </main>
   );
 }

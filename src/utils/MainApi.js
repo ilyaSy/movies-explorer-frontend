@@ -31,9 +31,10 @@ export default class MainApi {
 
   /* User data api */
   static getMe() {
-    return fetch(`${apiURL}/users/me`, { credentials: 'include' }).then(
-      MainApi._handleApiResult.bind(null, 'getMe')
-    );
+    return fetch(`${apiURL}/users/me`, {
+      headers: headers,
+      credentials: 'include',
+    }).then(MainApi._handleApiResult.bind(null, 'getMe'));
   }
 
   static patchMe(userData) {
@@ -47,9 +48,10 @@ export default class MainApi {
 
   /* Movie data api */
   static getMovies() {
-    return fetch(`${apiURL}/movies`, { credentials: 'include' }).then(
-      MainApi._handleApiResult.bind(null, 'getMovies')
-    );
+    return fetch(`${apiURL}/movies`, {
+      headers: headers,
+      credentials: 'include',
+    }).then(MainApi._handleApiResult.bind(null, 'getMovies'));
   }
 
   static saveMovie(movieData) {
