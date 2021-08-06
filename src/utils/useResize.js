@@ -1,15 +1,34 @@
 import { useEffect, useState } from 'react';
+import {
+  desktopMovieCountStart,
+  desktopMovieCountMore,
+  laptopMovieCountStart,
+  laptopMovieCountMore,
+  mobileMovieCountStart,
+  mobileMovieCountMore,
+} from './constants';
 
 const useResize = (width) => {
-  const resetMovieCountMore = (width) => (width >= 1100 ? 3 : 2);
+  const resetMovieCountMore = (width) => {
+    let moviesCountMoreUpd = 0;
+    if (width >= 1100) {
+      moviesCountMoreUpd = desktopMovieCountMore;
+    } else if (width <= 690) {
+      moviesCountMoreUpd = mobileMovieCountMore;
+    } else {
+      moviesCountMoreUpd = laptopMovieCountMore;
+    }
+    return moviesCountMoreUpd;
+  };
+  
   const resetMovieCountStart = (width) => {
     let moviesCountStartUpd = 0;
     if (width >= 1100) {
-      moviesCountStartUpd = 12;
+      moviesCountStartUpd = desktopMovieCountStart;
     } else if (width <= 690) {
-      moviesCountStartUpd = 5;
+      moviesCountStartUpd = mobileMovieCountStart;
     } else {
-      moviesCountStartUpd = 8;
+      moviesCountStartUpd = laptopMovieCountStart;
     }
     return moviesCountStartUpd;
   };

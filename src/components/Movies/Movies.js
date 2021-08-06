@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
+import { shortFilmDuration } from '../../utils/constants';
 import './Movies.css';
 
 export default function Movies({movies, loadMovies, userMovies, loadUserMovies, onMovieAction}) {
@@ -26,7 +27,7 @@ export default function Movies({movies, loadMovies, userMovies, loadUserMovies, 
       [] : 
       moviesList
         .filter((m) => RegExp(searchValue, 'i').test(m.nameRU) || RegExp(searchValue, 'i').test(m.nameEN))
-        .filter((m) => (shortFilmValue ? m.duration <= 40 : true))
+        .filter((m) => (shortFilmValue ? m.duration <= shortFilmDuration : true))
   };
 
   return (
