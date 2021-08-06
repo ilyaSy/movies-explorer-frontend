@@ -1,6 +1,5 @@
 import { useLocation } from 'react-router-dom';
 import { savedMoviesURL } from '../../utils/constants';
-// import { getHours, getMinutes } from 'date-fns';
 import movieSavedPic from '../../images/save.svg';
 import movieDeletePic from '../../images/delete.svg';
 import MainApi from '../../utils/MainApi';
