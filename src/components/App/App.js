@@ -13,6 +13,7 @@ import MainApi from '../../utils/MainApi';
 import MoviesApi from '../../utils/MoviesApi';
 import errorHandler from '../../utils/errorHandler';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import {
   signupURL,
@@ -29,6 +30,8 @@ export default function App() {
   const [isLogged, setIsLogged] = useState(false);
   const [userMovies, setUserMovies] = useState(null);
   const [movies, setMovies] = useState(null);
+  const [isTooltipOpened, setIsTooltipOpened] = useState(false);
+  const [infoText, setInfoText] = useState('');
   const history = useHistory();
 
   useEffect(() => {
@@ -45,7 +48,8 @@ export default function App() {
       });
   }, [history]);
 
-  const signIn = (email, password, setError) => {
+  const signIn = (email, password, setError, setIsLoading) => {
+    setIsLoading(true);
     MainApi.signIn({ email, password })
       .then((res) => {
         if (res.login === 'success') {
@@ -58,15 +62,18 @@ export default function App() {
           });
         }
       })
-      .catch((err) => setError(errorHandler(err.status, 'login')));
+      .catch((err) => setError(errorHandler(err.status, 'login')))
+      .finally(() => setIsLoading(false));
   };
 
-  const signUp = (name, email, password, setError) => {
+  const signUp = (name, email, password, setError, setIsLoading) => {
+    setIsLoading(true);
     MainApi.signUp({ name, email, password })
       .then((res) => {
         if (res.data) signIn(email, password, setError);
       })
-      .catch((err) => setError(errorHandler(err.status, 'registration')));
+      .catch((err) => setError(errorHandler(err.status, 'registration')))
+      .finally(() => setIsLoading(false));
   };
 
   const signOut = () => {
@@ -145,6 +152,9 @@ export default function App() {
     }
   };
 
+  const handleTooltipOpen = () => setIsTooltipOpened(true);
+  const handleTooltipClose = () => setIsTooltipOpened(false);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Header isLogged={isLogged} />
@@ -170,6 +180,8 @@ export default function App() {
           loadUserMovies={loadUserMovies}
           onMovieAction={updateMoviesList}
           path={moviesURL}
+          onTooltipOpen={handleTooltipOpen}
+          setInfoText={setInfoText}
         />
 
         <ProtectedRoute
@@ -179,6 +191,8 @@ export default function App() {
           loadUserMovies={loadUserMovies}
           onMovieAction={updateUserMoviesList}
           path={savedMoviesURL}
+          onTooltipOpen={handleTooltipOpen}
+          setInfoText={setInfoText}
         />
 
         <ProtectedRoute
@@ -187,6 +201,8 @@ export default function App() {
           signOut={signOut}
           setUserData={setCurrentUser}
           path={profileURL}
+          onTooltipOpen={handleTooltipOpen}
+          setInfoText={setInfoText}
         />
 
         <Route path='*'>
@@ -194,6 +210,13 @@ export default function App() {
         </Route>
       </Switch>
       <Footer />
+
+      <InfoTooltip 
+        isOpened={isTooltipOpened}
+        onClose={handleTooltipClose}
+        text={infoText}
+      />
+
     </CurrentUserContext.Provider>
   );
 }

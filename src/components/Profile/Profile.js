@@ -5,7 +5,7 @@ import useValidation from '../../utils/useValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Profile.css';
 
-export default function Profile({ signOut }) {
+export default function Profile({ signOut, onTooltipOpen, setInfoText }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState(currentUser.name);
   const [baseName, setBaseName] = useState(currentUser.name);
@@ -28,6 +28,8 @@ export default function Profile({ signOut }) {
       .then((userData) => {
         setName(userData.name);
         setBaseName(userData.name);
+        setInfoText('Данные успешно обновлены!');
+        onTooltipOpen();
       })
       .catch((err) => setErrorText(errorHandler(err.status, 'profile')));
   };
