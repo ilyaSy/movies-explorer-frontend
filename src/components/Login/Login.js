@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { signupURL } from '../../utils/constants';
+import Preloader from '../Preloader/Preloader';
 import useValidation from '../../utils/useValidation';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import './Login.css';
 
 export default function Login({ signIn }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState('');
   const [fields, setFields] = useState({
     email: '',
@@ -17,7 +20,7 @@ export default function Login({ signIn }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    signIn(fields.email, fields.password, setErrorText);
+    signIn(fields.email, fields.password, setErrorText, setIsLoading);
   };
 
   return (
@@ -76,9 +79,9 @@ export default function Login({ signIn }) {
           {errorText}
         </p>
         <button
-          className={`login__button ${isValidData && 'login__button_active'}`}
+          className={`login__button ${(isValidData && !isLoading) && 'login__button_active'}`}
           type='submit'
-          disabled={!isValidData}
+          disabled={!isValidData || isLoading}
         >
           Войти
         </button>
@@ -89,6 +92,12 @@ export default function Login({ signIn }) {
           Регистрация
         </Link>
       </p>
+
+      {isLoading && (
+        <InfoTooltip isOpened={true}>
+          <Preloader />
+        </InfoTooltip>
+      )}
     </main>
   );
 }

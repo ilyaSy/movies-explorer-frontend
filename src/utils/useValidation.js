@@ -11,11 +11,13 @@ const useValidation = (fields) => {
         setIsValid(false);
       } else if (field !== 'email') {
         const el = document.querySelector(`#${field}`)
-        if (el.minLength && fields[field].length < el.minLength) setIsValid(false);
-        if (el.maxLength && fields[field].length > el.maxLength) setIsValid(false);
-        if (el.pattern && fields[field].length > 0) {
-          const regexp = new RegExp(el.pattern);
-          if (!regexp.test(fields[field])) setIsValid(false);
+        if (el) {
+          if (el.minLength && fields[field].length < el.minLength) setIsValid(false);
+          if (el.maxLength && fields[field].length > el.maxLength) setIsValid(false);
+          if (el.pattern && fields[field].length > 0) {
+            const regexp = new RegExp(el.pattern);
+            if (!regexp.test(fields[field])) setIsValid(false);
+          }
         }
       }
     }

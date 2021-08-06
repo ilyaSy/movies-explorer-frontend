@@ -1,16 +1,21 @@
 import { useEffect } from 'react';
-import { Route, useHistory } from 'react-router-dom';
+import { Redirect, Route, useHistory } from 'react-router-dom';
 
-export default function ProtectedRoute({ component: Component, isLogged, path, ...props }) {
+export default function ProtectedRoute({ component: Component, isLogged, loadMe, path, ...props }) {
   const history = useHistory();
+  console.log(document.location.pathname);
   useEffect(() => {
-    if (!isLogged) history.push('/');
-  }, [history, isLogged]);
+    if (!isLogged) {
+      const pathname = document.location.pathname;
+      loadMe(pathname);
+      history.push('/');
+    }
+  }, [history, isLogged, loadMe]);
 
   return (
-    <Route path={path}>
-      {/* {isLogged ? <Component {...props} /> : <Redirect to='/' />} */}
-      {isLogged && <Component {...props} />}
+    <Route exact path={path}>
+      {isLogged ? <Component {...props} /> : <Redirect to='/' />}
+      {/* {isLogged && <Component {...props} />} */}
     </Route>
   );
 }

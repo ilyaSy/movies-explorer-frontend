@@ -2,11 +2,14 @@ import { useContext, useEffect, useState } from 'react';
 import MainApi from '../../utils/MainApi';
 import errorHandler from '../../utils/errorHandler';
 import useValidation from '../../utils/useValidation';
+import Preloader from '../Preloader/Preloader';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Profile.css';
 
 export default function Profile({ signOut, onTooltipOpen, setInfoText }) {
   const currentUser = useContext(CurrentUserContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState(currentUser.name);
   const [baseName, setBaseName] = useState(currentUser.name);
   const [isEditable, setIsEditable] = useState(false);
@@ -23,7 +26,7 @@ export default function Profile({ signOut, onTooltipOpen, setInfoText }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    setIsLoading(true);
     MainApi.patchMe({ name, email })
       .then((userData) => {
         setName(userData.name);
@@ -31,7 +34,8 @@ export default function Profile({ signOut, onTooltipOpen, setInfoText }) {
         setInfoText('Данные успешно обновлены!');
         onTooltipOpen();
       })
-      .catch((err) => setErrorText(errorHandler(err.status, 'profile')));
+      .catch((err) => setErrorText(errorHandler(err.status, 'profile')))
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -99,6 +103,12 @@ export default function Profile({ signOut, onTooltipOpen, setInfoText }) {
       >
         Выйти из аккаунта
       </button>
+
+      {isLoading && (
+        <InfoTooltip isOpened={true}>
+          <Preloader />
+        </InfoTooltip>
+      )}
     </main>
   );
 }

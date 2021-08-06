@@ -33,20 +33,43 @@ export default function App() {
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const [infoText, setInfoText] = useState('');
   const history = useHistory();
+  // const [pathname, setPathname] = useState('/');
 
-  useEffect(() => {
+  console.log(document.location.pathname);
+  console.log(history);
+
+  // useEffect(() => {
+  //   MainApi.getMe()
+  //     .then((res) => {
+  //       if (res.data) {
+  //         setCurrentUser(res.data);
+  //         setIsLogged(true);
+  //         // history.goBack();
+  //         // history.push(history.location.pathname)
+  //         history.push(pathname)
+  //       }
+  //     })
+  //     .catch((e) => {
+  //       if (e.status !== 401) console.log(e)
+  //     });
+  // }, [history, pathname]);
+
+  const loadMe = (pathname) => {
+    console.log(pathname);
     MainApi.getMe()
       .then((res) => {
         if (res.data) {
           setCurrentUser(res.data);
           setIsLogged(true);
-          history.goBack();
+          // history.goBack();
+          // history.push(history.location.pathname)
+          history.push(pathname)
         }
       })
       .catch((e) => {
         if (e.status !== 401) console.log(e)
       });
-  }, [history]);
+  };
 
   const signIn = (email, password, setError, setIsLoading) => {
     setIsLoading(true);
@@ -173,6 +196,7 @@ export default function App() {
 
         <ProtectedRoute
           isLogged={isLogged}
+          loadMe={loadMe}
           component={Movies}
           movies={movies}
           loadMovies={loadMovies}
@@ -186,6 +210,7 @@ export default function App() {
 
         <ProtectedRoute
           isLogged={isLogged}
+          loadMe={loadMe}
           component={SavedMovies}
           userMovies={userMovies}
           loadUserMovies={loadUserMovies}
@@ -197,6 +222,7 @@ export default function App() {
 
         <ProtectedRoute
           isLogged={isLogged}
+          loadMe={loadMe}
           component={Profile}
           signOut={signOut}
           setUserData={setCurrentUser}
