@@ -43,9 +43,9 @@ export default function MoviesCardList ({ movies, updateMoviesList, isSearchNotC
       <>
         <section className='movies-list'>
           {
-            moviesShown.map((movie, index) => (
+            moviesShown.map((movie) => (
               <MoviesCard 
-                key={index}
+                key={movie.movieId}
                 movie={movie}
                 updateMoviesList={updateMoviesList}
               />
