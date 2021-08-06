@@ -11,7 +11,7 @@ export default function SavedMovies ({userMovies, onMovieAction, loadUserMovies}
   const [isErrData, setIsErrData] = useState(false);
 
   useEffect(() => {
-    if (!userMovies || !userMovies.length) loadUserMovies(setIsErrData, setIsLoading);
+    if (!userMovies) loadUserMovies(setIsErrData, setIsLoading);
   }, [userMovies, loadUserMovies]);
 
   const handleSearch = (searchValue, shortFilmValue) => {
@@ -36,13 +36,14 @@ export default function SavedMovies ({userMovies, onMovieAction, loadUserMovies}
       />
 
       {!isLoading && !isErrData && (
-        <MoviesCardList 
+        <MoviesCardList
+          isSearchNotClicked={!search && !shortFilm}
           movies={filterMovies(userMovies, search, shortFilm)}
           updateMoviesList={onMovieAction}          
         />
       )}
       {!isLoading && isErrData && (
-        <p className='movie__description-text'>
+        <p className='saved-movies__error-text'>
           Во время запроса произошла ошибка. Возможно, проблема с соединением
           или сервер недоступен. Подождите немного и попробуйте ещё раз
         </p>

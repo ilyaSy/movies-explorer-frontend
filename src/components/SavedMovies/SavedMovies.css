@@ -8,7 +8,7 @@
   flex-direction: column;
 }
 
-.saved-movies__description-text {
+.saved-movies__error-text {
   padding: 0;
   margin: auto;
   text-align: center;

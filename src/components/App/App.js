@@ -30,15 +30,14 @@ export default function App() {
   const [userMovies, setUserMovies] = useState(null);
   const [movies, setMovies] = useState(null);
   const history = useHistory();
-  const pathname = history.location.pathname;
-  
+
   useEffect(() => {
     MainApi.getMe()
       .then((res) => {
         if (res.data) {
           setCurrentUser(res.data);
           setIsLogged(true);
-          history.push(pathname);
+          history.goBack();
         }
       })
       .catch((e) => {
@@ -139,11 +138,11 @@ export default function App() {
   };
 
   const updateUserMoviesList = (movie) => {
-    delete movie._id;
     setUserMovies(userMovies.filter((m) => m.movieId !== movie.movieId));
-    setMovies(
-      movies.map((m) => (m.movieId === movie.movieId ? movie : m))
-    );
+    if (movies) {
+      delete movie._id;
+      setMovies(movies.map((m) => (m.movieId === movie.movieId ? movie : m)));
+    }
   };
 
   return (

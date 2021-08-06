@@ -38,12 +38,13 @@ export default function Movies({movies, loadMovies, userMovies, loadUserMovies, 
       />
       {!isLoading && !isErrData && (
         <MoviesCardList
+          isSearchNotClicked={!search && !shortFilm}
           movies={filterMovies(movies, search, shortFilm)}
           updateMoviesList={onMovieAction}
         />
       )}
       {!isLoading && isErrData && (
-        <p className='movie__description-text'>
+        <p className='movies__error-text'>
           Во время запроса произошла ошибка. Возможно, проблема с соединением
           или сервер недоступен. Подождите немного и попробуйте ещё раз
         </p>

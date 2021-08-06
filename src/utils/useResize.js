@@ -26,6 +26,10 @@ const useResize = (width) => {
     setMoviesCountStart(resetMovieCountStart(width));
     // }
     setMoviesCountMore(resetMovieCountMore(width));
+    return () => {
+      setMoviesCountStart(resetMovieCountStart(width));
+      setMoviesCountMore(resetMovieCountMore(width));
+    };
   }, [width]);
 
   return [moviesCountStart, moviesCountMore];

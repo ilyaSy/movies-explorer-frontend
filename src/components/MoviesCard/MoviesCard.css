@@ -99,25 +99,11 @@
   z-index: 10;
 }
 
-/* @media screen and (max-width: 1100px) {
-  .movie__picture {
-    width: 339px;
-    height: 190px;
-  }
-} */
-
 @media screen and (max-width: 768px) {
   .movie__caption {
     padding: 25px 0 0 0;
   }
 }
-/* 
-@media screen and (max-width: 690px) {
-  .movie__picture {
-    width: 300px;
-    height: 168px;
-  }
-} */
 
 @media screen and (max-width: 456px) {
   .movie__caption {

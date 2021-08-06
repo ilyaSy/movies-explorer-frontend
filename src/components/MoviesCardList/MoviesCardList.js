@@ -5,7 +5,7 @@ import { moviesURL } from '../../utils/constants';
 import useResize from '../../utils/useResize'
 import './MoviesCardList.css';
 
-export default function MoviesCardList ({ movies, updateMoviesList }) {
+export default function MoviesCardList ({ movies, updateMoviesList, isSearchNotClicked }) {
   const [width, setWidth] = useState(window.innerWidth);
   const [moviesShown, setMoviesShown] = useState([]);
   const location = useLocation();
@@ -39,27 +39,17 @@ export default function MoviesCardList ({ movies, updateMoviesList }) {
   }
 
   return (
-    movies.length ? (
+    (movies.length || isSearchNotClicked) ? (
       <>
         <section className='movies-list'>
           {
-            // pathname === moviesURL ? (
-              moviesShown.map((movie, index) => (
-                <MoviesCard 
-                  key={index}
-                  movie={movie}
-                  updateMoviesList={updateMoviesList}
-                />
-              ))
-            // ) : (
-            //   movies.map((movie, index) => (
-            //     <MoviesCard 
-            //       key={index}
-            //       movie={movie}
-            //       updateMoviesList={updateMoviesList}
-            //     />
-            //   ))
-            // )
+            moviesShown.map((movie, index) => (
+              <MoviesCard 
+                key={index}
+                movie={movie}
+                updateMoviesList={updateMoviesList}
+              />
+            ))
           }
         </section>
         {
