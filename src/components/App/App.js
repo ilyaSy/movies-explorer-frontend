@@ -50,12 +50,13 @@ export default function App() {
         if (userData) {
           setCurrentUser(userData.data);
           setIsLogged(true);
-          history.push(pathname)
+          history.push(pathname);
           localStorage.setItem('email', userData.data.email);
         }
       })
       .catch((e) => {
         localStorage.removeItem('email');
+        history.push('/');
         if (e.status !== 401) console.log(e)
       });
   }, [history, pathname]);
