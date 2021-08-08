@@ -27,6 +27,7 @@ import './App.css';
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState({
+    name: '',
     email: localStorage.getItem('email')
   });
   const [isLogged, setIsLogged] = useState(false);
@@ -44,11 +45,10 @@ export default function App() {
   }, [history]);
 
   useEffect(() => {
-    Promise.all([MainApi.getMe(), MainApi.getMovies()])
-      .then(([userData, movieData]) => {
-        if (userData && movieData) {
+    MainApi.getMe()
+      .then((userData) => {
+        if (userData) {
           setCurrentUser(userData.data);
-          setUserMovies(movieData.filter((m) => m.owner.email === userData.data.email));
           setIsLogged(true);
           history.push(pathname)
           localStorage.setItem('email', userData.data.email);
@@ -76,7 +76,7 @@ export default function App() {
         }
       })
       .catch((err) => setError(errorHandler(err.status, 'login')))
-      .finally(() => setIsLoading(false));
+      // .finally(() => setIsLoading(false));
   };
 
   const signUp = (name, email, password, setError, setIsLoading) => {
@@ -105,9 +105,10 @@ export default function App() {
 
   const loadUserMovies = (setIsErrData, setIsLoading) => {
     setIsLoading(true);
+    const email = currentUser.email || localStorage.getItem('email');
     MainApi.getMovies()
       .then((loadedMovies) => {
-        setUserMovies(loadedMovies.filter((m) => m.owner.email === currentUser.email));
+        setUserMovies(loadedMovies.filter((m) => m.owner.email === email));
       })
       .catch((err) => {
         console.log(err);

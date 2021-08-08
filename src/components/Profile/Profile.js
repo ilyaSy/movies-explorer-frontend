@@ -19,6 +19,11 @@ export default function Profile({ signOut, onTooltipOpen, setInfoText }) {
   const isValidData = useValidation({ name: name });
 
   useEffect(() => {
+    setName(currentUser.name);
+    setBaseName(currentUser.name);
+  }, [currentUser]);
+
+  useEffect(() => {
     setIsEditable(name !== baseName);
   }, [name, baseName]);
 
