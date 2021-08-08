@@ -26,7 +26,9 @@ import {
 import './App.css';
 
 export default function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({
+    email: localStorage.getItem('email')
+  });
   const [isLogged, setIsLogged] = useState(false);
   const [userMovies, setUserMovies] = useState(null);
   const [movies, setMovies] = useState(null);
@@ -42,15 +44,18 @@ export default function App() {
   }, [history]);
 
   useEffect(() => {
-    MainApi.getMe()
-      .then((res) => {
-        if (res.data) {
-          setCurrentUser(res.data);
+    Promise.all([MainApi.getMe(), MainApi.getMovies()])
+      .then(([userData, movieData]) => {
+        if (userData && movieData) {
+          setCurrentUser(userData.data);
+          setUserMovies(movieData.filter((m) => m.owner.email === userData.data.email));
           setIsLogged(true);
           history.push(pathname)
+          localStorage.setItem('email', userData.data.email);
         }
       })
       .catch((e) => {
+        localStorage.removeItem('email');
         if (e.status !== 401) console.log(e)
       });
   }, [history, pathname]);
@@ -62,6 +67,7 @@ export default function App() {
         if (res.login === 'success') {
           setIsLogged(true);
           setCurrentUser({ email: email });
+          localStorage.setItem('email', email);
           history.push(moviesURL);
 
           MainApi.getMe().then((res) => {
@@ -90,6 +96,7 @@ export default function App() {
           setIsLogged(false);
           setUserMovies(null);
           setMovies(null);
+          localStorage.removeItem('email');
           history.push('/');
         }
       })
@@ -102,7 +109,10 @@ export default function App() {
       .then((loadedMovies) => {
         setUserMovies(loadedMovies.filter((m) => m.owner.email === currentUser.email));
       })
-      .catch(() => setIsErrData(true))
+      .catch((err) => {
+        console.log(err);
+        setIsErrData(true);
+      })
       .finally(() => setIsLoading(false));
   };
 
@@ -180,7 +190,6 @@ export default function App() {
 
         <ProtectedRoute
           isLogged={isLogged}
-          // loadMe={loadMe}
           component={Movies}
           movies={movies}
           loadMovies={loadMovies}
@@ -188,25 +197,19 @@ export default function App() {
           loadUserMovies={loadUserMovies}
           onMovieAction={updateMoviesList}
           path={moviesURL}
-          onTooltipOpen={handleTooltipOpen}
-          setInfoText={setInfoText}
         />
 
         <ProtectedRoute
           isLogged={isLogged}
-          // loadMe={loadMe}
           component={SavedMovies}
           userMovies={userMovies}
           loadUserMovies={loadUserMovies}
           onMovieAction={updateUserMoviesList}
           path={savedMoviesURL}
-          onTooltipOpen={handleTooltipOpen}
-          setInfoText={setInfoText}
         />
 
         <ProtectedRoute
           isLogged={isLogged}
-          // loadMe={loadMe}
           component={Profile}
           signOut={signOut}
           setUserData={setCurrentUser}

@@ -29,6 +29,7 @@
   font-size: 14px;
   line-height: 17px;
   transition: opacity .3s ease-out;
+  cursor: pointer;
 }
 
 .page-not-found__back-url:hover {

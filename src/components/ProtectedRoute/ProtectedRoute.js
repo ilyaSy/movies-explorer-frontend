@@ -3,15 +3,14 @@ import { Redirect, Route, useHistory } from 'react-router-dom';
 
 export default function ProtectedRoute({ component: Component, isLogged, path, ...props }) {
   const history = useHistory();
-  console.log(document.location.pathname);
+  const emailFromStorage = localStorage.getItem('email');
   useEffect(() => {
-    if (!isLogged) history.push('/');
-  }, [history, isLogged]);
+    if (!isLogged && !emailFromStorage) history.push('/');
+  }, [history, isLogged, emailFromStorage]);
 
   return (
     <Route exact path={path}>
-      {isLogged ? <Component {...props} /> : <Redirect to='/' />}
-      {/* {isLogged && <Component {...props} />} */}
+      {(isLogged || emailFromStorage) ? <Component {...props} /> : <Redirect to='/' />}
     </Route>
   );
 }
