@@ -1,29 +1,65 @@
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import { moviesURL, savedMoviesURL } from '../../utils/constants';
+import { moviesURL } from '../../utils/constants';
+import useResize from '../../utils/useResize'
 import './MoviesCardList.css';
 
-export default function MoviesCardList ({movies}) {
+export default function MoviesCardList ({ movies, updateMoviesList, isSearchNotClicked }) {
+  const [width, setWidth] = useState(window.innerWidth);
+  const [moviesShown, setMoviesShown] = useState([]);
   const location = useLocation();
   const pathname = location.pathname;
 
-  const moviesShown = pathname === savedMoviesURL ?
-    [...movies.filter((m) => m.saved)] : [...movies]
+  const [moviesCountStart, moviesCountMore] = useResize(width);
+
+  // --------------------------------------------------------
+  const resetResize = () => setWidth(window.innerWidth);
+
+  let resizeTimer = false;
+  const handleResizeTimer = () => {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resetResize, 500);
+  }  
+
+  window.addEventListener('resize', handleResizeTimer);
+  // --------------------------------------------------------
+
+  useEffect(() => {
+    const moviesCount = !moviesShown.length || moviesShown.length < moviesCountStart ? 
+                          moviesCountStart : 
+                          moviesShown.length;
+    pathname === moviesURL ?
+      setMoviesShown(movies.filter((m, i) => i < moviesCount)) :
+      setMoviesShown(movies)
+  }, [movies, moviesCountStart, pathname, moviesShown.length]);
+
+  const handleShowMore = () => {
+    setMoviesShown(movies.filter((m, i) => i < moviesShown.length + moviesCountMore));
+  }
 
   return (
-    <>
-      <section className='movies-list'>
+    (movies.length || isSearchNotClicked) ? (
+      <>
+        <section className='movies-list'>
+          {
+            moviesShown.map((movie) => (
+              <MoviesCard 
+                key={movie.movieId}
+                movie={movie}
+                updateMoviesList={updateMoviesList}
+              />
+            ))
+          }
+        </section>
         {
-          moviesShown.map((movie) => (
-            <MoviesCard key={movie.id} movie={movie} />
-          ))
+          pathname === moviesURL && moviesShown.length < movies.length && (
+            <button className='movies-list__button' onClick={handleShowMore}>Ещё</button>
+          )
         }
-      </section>
-      {
-        pathname === moviesURL && (
-          <button className='movies-list__button'>Ещё</button>
-        )
-      }
-    </>
+      </>
+    ) : (
+      <p className='movies-list_nodata-text'>Ничего не найдено</p>
+    )
   );
 }

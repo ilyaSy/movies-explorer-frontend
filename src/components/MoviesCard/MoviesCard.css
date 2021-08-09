@@ -2,16 +2,29 @@
   position: relative;
   margin: 0;
   padding: 0;
-  /* width: 360px; */
+  width: 100%;
+  max-width: 360px;
 }
 
-.movie__picture{
+.movie__trailer-link {
+  display: block;
+  margin: 0;
+  padding: 56% 0 0 0;
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.movie__picture {
+  position: absolute;
+  top: 0;
+  left: 0;
   margin: 0;
   padding: 0;
   width: 100%;
-  /* width: 360px;
-  height: 201px; */
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   object-position: center;
   border-radius: 6px;
 }
@@ -20,7 +33,7 @@
   margin: 0;
   padding: 14px 14px 0 14px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
@@ -28,6 +41,8 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 15.73px;
+  margin: 0;
+  padding: 0;
 }
 
 .movie__duration {
@@ -40,6 +55,7 @@
   color: #a0a0a0;
   background-color: #f9f9f9;
   border-radius: 3px;
+  white-space: nowrap;
 }
 
 .movie__button {
@@ -67,6 +83,10 @@
 
 .movie__button:hover {
   opacity: .8;
+}
+
+.movie__button_type_delete {
+  visibility: visible;
 }
 
 .movie__button_type_delete,

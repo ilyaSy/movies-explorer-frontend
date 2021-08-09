@@ -88,11 +88,22 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 16.94px;
-  color: #fff;
-  background-color: #000;
+  /* color: #fff;
+  background-color: #000; */
+  color: #c2c2c2;
+  background-color: #f8f8f8;
   border-radius: 3px;
   border: 0;
   transition: opacity .3s ease-out;
+}
+
+.registration__button:not(:disabled):hover {
+  opacity: .8;
+}
+
+.registration__button_active {
+  color: #fff;
+  background-color: #000;
 }
 
 .registration__login {
@@ -116,10 +127,6 @@
 
 .registration__login-link:hover {
   opacity: .7;
-}
-
-.registration__button:hover {
-  opacity: .8;
 }
 
 .registration__error-update {

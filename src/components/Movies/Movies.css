@@ -8,6 +8,15 @@
   flex-direction: column;
 }
 
+.movies__error-text {
+  padding: 0;
+  margin: auto;
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+
 @media screen and (max-width: 770px) {
   .movies {
     padding: 10px 30px 0 30px;
